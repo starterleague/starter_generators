@@ -1,0 +1,16 @@
+<h1>Editing <%= human_name %> #<%%= @<%= singular_table_name %>.id %></h1>
+
+<%%= form_tag("/<%= plural_name %>/#{@<%= singular_name %>.id}", method: 'put') do %>
+
+  <% attributes.each do |attribute| -%>
+<div>
+    <%%= label_tag :<%= attribute.name %> %><br />
+    <%%= <%= attribute.field_type %>_tag :<%= attribute.name %>, @<%= singular_table_name %>.<%= attribute.name %><%= "?" if attribute.type == :boolean %> %>
+  </div>
+
+  <% end %>
+  <div>
+    <%%= submit_tag "Update <%= human_name %>" %>
+  </div>
+
+<%% end %>

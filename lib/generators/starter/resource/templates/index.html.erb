@@ -1,0 +1,27 @@
+<h1><%= plural_table_name.humanize %></h1>
+
+<table>
+  <tr>
+<% attributes.each do |attribute| -%>
+    <th><%= attribute.human_name %></th>
+<% end -%>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+  <tr>
+<% attributes.each do |attribute| -%>
+    <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+<% end -%>
+    <td><%%= link_to 'Show', "<%= plural_name %>/#{<%= singular_table_name %>.id}" %> %></td>
+    <td><%%= link_to 'Edit', "/<%= plural_name %>/#{<%= singular_table_name %>.id}/edit" %></td>
+    <td></td>
+  </tr>
+<%% end %>
+</table>
+
+<br />
+
+<%%= link_to 'New <%= human_name %>', "/<%= plural_name %>/new" %>
