@@ -1,12 +1,14 @@
 # StarterGenerators
 
-TODO: Write a gem description
+Rails generators that are helpful in class.
+
+Currently there is only one generator, **starter:resource**.
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'starter_generators'
+    gem 'starter_generators', git: 'git@github.com:starterleague/starter_generators.git'
 
 And then execute:
 
@@ -18,12 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+For full usage instructions, run:
 
-## Contributing
+    $ rails g starter:resource
 
-1. Fork it
-2. Create your feature branch (`git checkout -b my-new-feature`)
-3. Commit your changes (`git commit -am 'Add some feature'`)
-4. Push to the branch (`git push origin my-new-feature`)
-5. Create new Pull Request
