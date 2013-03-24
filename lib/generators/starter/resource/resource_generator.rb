@@ -34,27 +34,38 @@ module Starter
     end
 
 
-    # def generate_routes
-    #   route ["# Routes for the #{singular_name.capitalize} resource:",
-    #     "  # CREATE",
-    #     "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new'",
-    #     "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
-    #     "",
-    #     "  # READ",
-    #     "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
-    #     "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show'",
-    #     "",
-    #     "  # UPDATE",
-    #     "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit'",
-    #     "  put '/#{plural_name}/:id', controller: '#{plural_name}', action: 'update'",
-    #     "",
-    #     "  # DELETE",
-    #     "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
-    #     "  ##{'-' * 30}"
-    #   ].join("\n")
-    # end
+    def generate_routes
+
+      route ["# Routes for the #{singular_name.capitalize} resource:",
+        "  # CREATE",
+        "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new'",
+        "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
+        "",
+        "  # READ",
+        "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
+        "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show'",
+        "",
+        "  # UPDATE",
+        "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit'",
+        "  put '/#{plural_name}/:id', controller: '#{plural_name}', action: 'update'",
+        "",
+        "  # DELETE",
+        "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
+        "  ##{'-' * 30}"
+      ].join("\n"), "RESTful routes"
+    end
 
 protected
+
+  # Override of Rails::Generators::Actions
+  def route(routing_code, title)
+    log :route, title
+    sentinel = /\.routes\.draw do(?:\s*\|map\|)?\s*$/
+
+    in_root do
+      inject_into_file 'config/routes.rb', "\n  #{routing_code}\n", { :after => sentinel, :verbose => false }
+    end
+  end
 
   def attributes_with_index
     attributes.select { |a| a.has_index? || (a.reference? && options[:indexes]) }
