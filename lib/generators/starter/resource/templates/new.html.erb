@@ -1,4 +1,4 @@
-<h1>New <%= human_name %></h1>
+<h1>New <%= human_name.titleize %></h1>
 
 <%%= form_tag("/<%= plural_name %>", method: 'post') do %>
 
@@ -10,6 +10,6 @@
 
   <% end %>
   <div>
-    <%%= submit_tag "Create <%= human_name %>" %>
+    <%%= submit_tag "Create <%= human_name.titleize %>" %>
   </div>
 <%% end %>

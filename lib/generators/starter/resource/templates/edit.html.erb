@@ -1,4 +1,4 @@
-<h1>Editing <%= human_name %> #<%%= @<%= singular_table_name %>.id %></h1>
+<h1>Editing <%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
 
 <%%= form_tag("/<%= plural_name %>/#{@<%= singular_name %>.id}", method: 'put') do %>
 
@@ -10,7 +10,7 @@
 
   <% end %>
   <div>
-    <%%= submit_tag "Update <%= human_name %>" %>
+    <%%= submit_tag "Update <%= human_name.titleize %>" %>
   </div>
 
 <%% end %>

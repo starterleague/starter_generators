@@ -1,2 +1,2 @@
-class <%= human_name %> < ActiveRecord::Base
+class <%= singular_name.camelize %> < ActiveRecord::Base
 end
