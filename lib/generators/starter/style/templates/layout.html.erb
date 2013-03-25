@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title><%= application_name %></title>
+  <%%= stylesheet_link_tag    "application", :media => "all" %>
+  <%%= javascript_include_tag "application" %>
+  <%%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Le styles -->
+  <!-- <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet"> -->
+  <style type="text/css">
+    body { padding-top: 60px; padding-bottom: 40px; }
+  </style>
+  <!-- <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet"> -->
+
+</head>
+<body>
+
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        <a class="brand" href="/"><%= application_name %></a>
+        <div class="nav-collapse">
+          <ul class="nav">
+<% if options[:navbar] %>
+            <li class="active"><%%= link_to "Home", "/" %></li>
+<% app_tables.each do |table_name| -%>
+            <li><%%= link_to "<%= table_name.humanize.titleize %>", "/<%= table_name %>" %></li>
+<% end -%>
+            <li><a href="#about">About</a></li>
+<% end -%>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <%% if flash[:notice] %>
+    <div class="alert alert-success">
+      <button type="button" class="close" data-dismiss="alert">&times;</button>
+      <strong>Notice</strong><%%= notice %>
+    </div>
+    <%% end %>
+
+    <%%= yield %>
+
+    <hr>
+
+    <footer>
+      <p>&copy; Company 2012</p>
+    </footer>
+
+  </div>
+
+</body>
+</html>
