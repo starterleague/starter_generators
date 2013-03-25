@@ -2,7 +2,7 @@
 
 Rails generators that are helpful in class.
 
-Currently there is only one generator, **starter:resource**.
+Currently there are two generators, **starter:resource** and **starter::style**.
 
 ## Installation
 
@@ -23,4 +23,5 @@ Or install it yourself as:
 For full usage instructions, run:
 
     $ rails g starter:resource
+    $ rails g starter:style
 
