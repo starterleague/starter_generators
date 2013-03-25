@@ -1,28 +1,31 @@
 <h1><%= plural_table_name.humanize %></h1>
 
-<table>
-  <tr>
-<% attributes.each do |attribute| -%>
-    <th><%= attribute.human_name %></th>
-<% end -%>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<%%= link_to 'Add a New <%= human_name.titleize %>', "/<%= plural_name %>/new" %>
 
-<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-  <tr>
+<table class="table table-hover">
+  <thead>
+    <tr>
 <% attributes.each do |attribute| -%>
-    <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+      <th><%= attribute.human_name %></th>
 <% end -%>
-    <td><%%= link_to 'Show', "/<%= plural_name %>/#{<%= singular_table_name %>.id}" %></td>
-    <td><%%= link_to 'Edit', "/<%= plural_name %>/#{<%= singular_table_name %>.id}/edit" %></td>
-    <td><%%= link_to 'Destroy', "/<%= plural_name %>/#{<%= singular_table_name %>.id}", method: 'delete', data: { confirm: 'Do you really want to delete this resource?' } %></td>
-    <td></td>
-  </tr>
-<%% end %>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <tr>
+  <% attributes.each do |attribute| -%>
+      <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+  <% end -%>
+      <td><%%= link_to 'Show', "/<%= plural_name %>/#{<%= singular_table_name %>.id}" %></td>
+      <td><%%= link_to 'Edit', "/<%= plural_name %>/#{<%= singular_table_name %>.id}/edit" %></td>
+      <td><%%= link_to 'Destroy', "/<%= plural_name %>/#{<%= singular_table_name %>.id}", method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" } %></td>
+      <td></td>
+    </tr>
+  <%% end %>
+  </body>
 </table>
 
-<br />
-
-<%%= link_to 'New <%= human_name %>', "/<%= plural_name %>/new" %>
