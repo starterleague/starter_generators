@@ -15,8 +15,9 @@
 <% attributes.each do |attribute| -%>
     <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
 <% end -%>
-    <td><%%= link_to 'Show', "<%= plural_name %>/#{<%= singular_table_name %>.id}" %> %></td>
+    <td><%%= link_to 'Show', "/<%= plural_name %>/#{<%= singular_table_name %>.id}" %></td>
     <td><%%= link_to 'Edit', "/<%= plural_name %>/#{<%= singular_table_name %>.id}/edit" %></td>
+    <td><%%= link_to 'Destroy', "/<%= plural_name %>/#{<%= singular_table_name %>.id}", method: 'delete', data: { confirm: 'Do you really want to delete this resource?' } %></td>
     <td></td>
   </tr>
 <%% end %>
