@@ -1,0 +1,9 @@
+<h1><%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
+
+<% attributes.each do |attribute| -%>
+<p>
+  <b><%= attribute.human_name %>:</b>
+  <%%= @<%= singular_table_name %>.<%= attribute.name %> %>
+</p>
+
+<% end %>

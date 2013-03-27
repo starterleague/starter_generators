@@ -10,6 +10,7 @@ module Starter
     argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
     remove_class_option :old_style_hash
     class_option :named_routes, :type => :boolean, :default => false
+    class_option :styled, :type => :boolean, :default => false, desc: 'Generates bootstrap-ready view templates'
 
     def generate_controller
       template 'controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"
@@ -29,8 +30,8 @@ module Starter
 
     def copy_view_files
       available_views.each do |view|
-        filename = filename_with_extensions(view)
-        template filename, File.join("app/views", controller_file_path, filename)
+        filename = view_filename_with_extensions(view)
+        template filename, File.join("app/views", controller_file_path, File.basename(filename))
       end
     end
 
@@ -89,6 +90,10 @@ protected
     options[:named_routes]
   end
 
+  def styled?
+    options[:styled]
+  end
+
   # Override of Rails::Generators::Actions
   def route(routing_code, title)
     log :route, title
@@ -107,8 +112,12 @@ protected
     %w(index new edit show)
   end
 
-  def filename_with_extensions(name)
-    [name, :html, :erb].compact.join(".")
+  def view_filename_with_extensions(name)
+    filename = [name, :html, :erb].compact.join(".")
+    if styled?
+      filename = File.join("bootstrapped", filename)
+    end
+    filename
   end
 
   end

@@ -1,0 +1,15 @@
+<h1>New <%= human_name.titleize %></h1>
+
+<%%= form_tag(<%= plural_name %>_url, method: 'post') do %>
+
+<% attributes.each do |attribute| -%>
+  <div>
+    <%%= label_tag :<%= attribute.name %> %><br />
+    <%%= <%= attribute.field_type %>_tag :<%= attribute.name %><%= "?" if attribute.type == :boolean %> %>
+  </div>
+
+  <% end %>
+  <div>
+    <%%= submit_tag "Create <%= human_name.titleize %>", class: 'btn' %>
+  </div>
+<%% end %>
