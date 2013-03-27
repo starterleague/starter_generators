@@ -9,6 +9,7 @@ module Starter
 
     argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
     remove_class_option :old_style_hash
+    class_option :named_routes, :type => :boolean, :default => false
 
     def generate_controller
       template 'controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"
@@ -22,9 +23,9 @@ module Starter
       migration_template "migration.rb", "db/migrate/create_#{table_name}.rb"
     end
 
-    def create_root_view_folder
-      empty_directory File.join("app/views", controller_file_path)
-    end
+    # def create_root_view_folder
+    #   empty_directory File.join("app/views", controller_file_path)
+    # end
 
     def copy_view_files
       available_views.each do |view|
@@ -35,8 +36,17 @@ module Starter
 
 
     def generate_routes
+      if named_routes?
+        route golden_7_named, "Named RESTful routes"
+      else
+        route golden_7, "RESTful routes"
+      end
+    end
 
-      route ["# Routes for the #{singular_name.capitalize} resource:",
+protected
+
+  def golden_7
+    ["# Routes for the #{singular_name.capitalize} resource:",
         "  # CREATE",
         "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new'",
         "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
@@ -52,10 +62,32 @@ module Starter
         "  # DELETE",
         "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
         "  ##{'-' * 30}"
-      ].join("\n"), "RESTful routes"
-    end
+      ].join("\n")
+  end
 
-protected
+  def golden_7_named
+    ["# Routes for the #{singular_name.capitalize} resource:",
+      "  # CREATE",
+      "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new', as: 'new_#{singular_name}'",
+      "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
+      "",
+      "  # READ",
+      "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index', as: '#{plural_name}'",
+      "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show', as: '#{singular_name}'",
+      "",
+      "  # UPDATE",
+      "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit', as: 'edit_#{singular_name}'",
+      "  put '/#{plural_name}/:id', controller: '#{plural_name}', action: 'update'",
+      "",
+      "  # DELETE",
+      "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
+      "  ##{'-' * 30}"
+      ].join("\n")
+  end
+
+  def named_routes?
+    options[:named_routes]
+  end
 
   # Override of Rails::Generators::Actions
   def route(routing_code, title)
