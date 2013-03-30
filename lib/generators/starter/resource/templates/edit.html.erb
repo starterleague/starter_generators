@@ -1,6 +1,6 @@
 <h1>Editing <%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
 
-<%%= form_tag(<%= singular_table_name %>_url(<%= singular_table_name %>), method: 'put') do %>
+<%%= form_tag(<%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'put') do %>
 
   <% attributes.each do |attribute| -%>
 <div>
