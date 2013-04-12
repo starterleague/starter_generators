@@ -18,6 +18,12 @@ module Starter
                         "\n\n/*= require #{bootswatch_name} */\n/*= require bootstrap_overrides */",
                         after: %r{\*\/}
       log :insert, 'Stylesheet manifest directives'
+      template 'bootstrap.min.js', 'app/assets/javascripts/bootstrap.min.js'
+      inject_into_file 'app/assets/javascripts/application.js',
+                       "\n//= require bootstrap.min",
+                       after: /^\/\/= require jquery$/,
+                       verbose: false
+      log :insert, 'Javascript manifest directives'
     end
 
     def generate_layout

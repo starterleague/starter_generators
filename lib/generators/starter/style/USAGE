@@ -1,8 +1,8 @@
 Description:
     Injects a bootswatch with FontAwesome support into your app.
 
-    BOOTSTRAP_NAME must be one of:
-        amelia, cerulian, cyborg, journal, readable, simplex, slate, spacelab, spruce, superhero, united
+    BOOTSWATCH_NAME must be one of:
+        amelia, cerulian, cyborg, journal, geo, readable, simplex, slate, spacelab, spruce, superhero, united
 
     LAYOUT_FILE defaults to "application".
 
