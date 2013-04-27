@@ -9,7 +9,9 @@ module Starter
 
     argument :attributes, :type => :array, :default => [], :banner => "field:type field:type"
     remove_class_option :old_style_hash
-    class_option :named_routes, :type => :boolean, :default => false
+    remove_class_option :force_plural
+    remove_class_option :skip_namespace
+    class_option :named_routes, :type => :boolean, :default => true
     class_option :styled, :type => :boolean, :default => false, desc: 'Generates bootstrap-ready view templates'
 
     def generate_controller
