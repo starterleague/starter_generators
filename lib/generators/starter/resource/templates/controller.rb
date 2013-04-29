@@ -18,7 +18,11 @@ class <%= plural_name.camelize %>Controller < ApplicationController
 @<%= singular_name.underscore %>.<%= attribute.name %> = params[:<%= attribute.name %>]
     <% end %>
     if @<%= singular_name.underscore %>.save
+      <% if named_routes? -%>
+      redirect_to <%= plural_name %>_url
+      <% else -%>
       redirect_to "/<%= plural_name %>"
+      <% end -%>
     else
       render 'new'
     end
@@ -34,7 +38,11 @@ class <%= plural_name.camelize %>Controller < ApplicationController
 @<%= singular_name.underscore %>.<%= attribute.name %> = params[:<%= attribute.name %>]
     <% end %>
     if @<%= singular_name.underscore %>.save
+      <% if named_routes? -%>
+      redirect_to <%= plural_name %>_url
+      <% else -%>
       redirect_to "/<%= plural_name %>"
+      <% end -%>
     else
       render 'edit'
     end
@@ -43,6 +51,10 @@ class <%= plural_name.camelize %>Controller < ApplicationController
   def destroy
     @<%= singular_name.underscore %> = <%= class_name %>.find_by_id(params[:id])
     @<%= singular_name.underscore %>.destroy
+    <% if named_routes? -%>
+    redirect_to <%= plural_name %>_url
+    <% else -%>
     redirect_to "/<%= plural_name %>"
+    <% end -%>
   end
 end

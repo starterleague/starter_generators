@@ -22,7 +22,7 @@
         <div class="nav-collapse">
           <ul class="nav">
 <% if options[:navbar] %>
-            <li class="active"><%%= link_to "Home", "/" %></li>
+            <li><%%= link_to "Home", "/" %></li>
 <% app_tables.each do |table_name| -%>
             <li><%%= link_to "<%= table_name.humanize.titleize %>", "/<%= table_name %>" %></li>
 <% end -%>
@@ -39,7 +39,7 @@
     <%% if flash[:notice] %>
     <div class="alert alert-success">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <strong>Notice</strong><%%= notice %>
+      <%%= notice %>
     </div>
     <%% end %>
 
