@@ -9,10 +9,13 @@
 <% attributes.each do |attribute| -%>
   <div>
     <%%= label_tag :<%= attribute.name %> %><br />
+<% if attribute.field_type == 'date' -%>
+    <%%= text_field_tag <%= attribute.name %> %>
+<% end -%>
     <%%= <%= attribute.field_type %>_tag :<%= attribute.name %><%= "?" if attribute.type == :boolean %> %>
   </div>
 
-  <% end %>
+<% end %>
   <div>
     <%%= submit_tag "Create <%= human_name.titleize %>" %>
   </div>
