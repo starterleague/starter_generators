@@ -1,3 +1,7 @@
+
+## Version 0.6.0  (March 30, 2013) ##
+* Rails 4 compatibility: use PATCH instead of PUT
+
 ## Version 0.3.1  (March 30, 2013) ##
 
 * Fix edit templates to use @ivar in the form_tag call.
