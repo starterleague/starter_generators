@@ -1,3 +1,9 @@
+## Version 0.7.2 (July 25, 2013)
+* Enhanced flash messaging
+
+## Version 0.7.1 (July 25, 2013)
+* Fix named routes
+
 ## Version 0.7.0  (July 25, 2013) ##
 * Change BOOTSWATCH_NAME to THEME_NAME
 * Use CDN for FontAwesome and Bootswatch themes.
