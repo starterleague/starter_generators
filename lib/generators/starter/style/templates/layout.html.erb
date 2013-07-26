@@ -44,11 +44,11 @@
 
   <div class="container">
 
-    <%% if flash[:notice] %>
-    <div class="alert alert-success">
-      <button type="button" class="close" data-dismiss="alert">&times;</button>
-      <%%= notice %>
-    </div>
+    <%% flash.each do |name, msg| %>
+      <div class="alert alert-<%%= name == :notice ? "success" : "error" %>">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <%%= msg %>
+      </div>
     <%% end %>
 
     <%%= yield %>
