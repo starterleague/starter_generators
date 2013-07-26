@@ -75,7 +75,7 @@ protected
       "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
       "",
       "  # READ",
-      "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index', as: '#{plural_name}'",
+      "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
       "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show', as: '#{singular_name}'",
       "",
       "  # UPDATE",
