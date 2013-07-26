@@ -1,4 +1,7 @@
-## Version 0.7.2 (July 25, 2013)
+## Version 0.7.3 (July 26, 2013)
+* Remove footer from layout to avoid bootstrap grid weirdness
+
+## Version 0.7.2 (July 26, 2013)
 * Enhanced flash messaging
 
 ## Version 0.7.1 (July 25, 2013)
