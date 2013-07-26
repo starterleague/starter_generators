@@ -3,9 +3,17 @@
 <head>
   <meta charset="utf-8">
   <title><%= application_name %></title>
+
   <%%= stylesheet_link_tag    "application", :media => "all" %>
+
+<% if bootswatch_theme? %>
+  <link href="//netdna.bootstrapcdn.com/bootswatch/2.3.2/<%= theme_name %>/bootstrap.min.css" rel="stylesheet">
+<% end %>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+
   <%%= javascript_include_tag "application" %>
   <%%= csrf_meta_tags %>
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -48,7 +56,7 @@
     <hr>
 
     <footer>
-      <p>&copy; Company 2012</p>
+      <p>&copy; My Company 2013</p>
     </footer>
 
   </div>

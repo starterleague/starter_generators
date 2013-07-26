@@ -1,5 +1,10 @@
+## Version 0.7.0  (July 25, 2013) ##
+* Change BOOTSWATCH_NAME to THEME_NAME
+* Use CDN for FontAwesome and Bootswatch themes.
+* Use hardcoded bootstrap 2.3.2 default css and js.
+* Rewrite USAGE info
 
-## Version 0.6.0  (March 30, 2013) ##
+## Version 0.6.0  (July 20, 2013) ##
 * Rails 4 compatibility: use PATCH instead of PUT
 
 ## Version 0.3.1  (March 30, 2013) ##

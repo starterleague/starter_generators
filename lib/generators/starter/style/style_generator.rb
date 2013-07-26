@@ -2,28 +2,36 @@ module Starter
   class StyleGenerator < Rails::Generators::Base
     source_root File.expand_path('../templates', __FILE__)
 
-    argument :bootswatch_name, :type => :string#, :default => 'spacelab'
+    argument :theme_name, :type => :string#, :default => 'default'
 
     class_option :layout, :type => :boolean, :default => true, :desc => "Generate a new application layout."
     class_option :navbar, :type => :boolean, :default => true, :desc => "Generate a model-based navbar."
     argument :layout_file, :type => :string, :default => 'application', :desc => "Layout filename"
 
     def inject_styles
-      template "bootstrap-css/#{bootswatch_name}.min.css", "app/assets/stylesheets/#{bootswatch_name}.css"
-      directory "font", "app/assets/stylesheets/font", verbose: false
-      template "font-awesome-css/font-awesome.min.css", "app/assets/stylesheets/font-awesome.css", verbose: false
-      log :insert, 'FontAwesome stylesheet and fonts'
-      copy_file 'bootstrap_overrides.css', 'app/assets/stylesheets/bootstrap_overrides.css'
-      inject_into_file "app/assets/stylesheets/application.css",
-                        "\n\n/*= require #{bootswatch_name} */\n/*= require bootstrap_overrides */",
-                        after: %r{\*\/}
-      log :insert, 'Stylesheet manifest directives'
-      template 'bootstrap.min.js', 'app/assets/javascripts/bootstrap.min.js'
+      template 'bootstrap_overrides.css', 'app/assets/stylesheets/bootstrap_overrides.css', verbose: false
+
+      if bootswatch_theme?
+        log :insert, "Bootswatch theme '#{theme_name}'"
+        inject_into_file "app/assets/stylesheets/application.css", "\n *= require bootstrap_overrides\n", before: /^\s*\*\//, verbose: false
+        log :insert, 'Bootstrap customizations'
+        gsub_file 'app/assets/stylesheets/application.css', /^\s*\*= require bootstrap.min \./, ''
+
+      else
+        template 'bootstrap.min.css', 'app/assets/stylesheets/bootstrap.min.css', verbose: false
+        inject_into_file "app/assets/stylesheets/application.css", " *= require bootstrap.min\n", before: /^\s*\*\//, verbose: false
+        log :insert, 'Bootstrap CSS framework'
+        inject_into_file "app/assets/stylesheets/application.css", " *= require bootstrap_overrides\n", before: /^\s*\*\//, verbose: false
+        log :insert, 'Bootstrap customizations'
+      end
+
+      log :insert, 'FontAwesome support'
+
+      template 'bootstrap.min.js', 'app/assets/javascripts/bootstrap.min.js', verbose: false
       inject_into_file 'app/assets/javascripts/application.js',
                        "\n//= require bootstrap.min",
                        after: /^\/\/= require jquery$/,
                        verbose: false
-      log :insert, 'Javascript manifest directives'
     end
 
     def generate_layout
@@ -31,6 +39,12 @@ module Starter
     end
 
   protected
+
+    def bootswatch_theme?
+      if theme_name.present?
+        (theme_name.downcase != 'default') && (theme_name.downcase != 'd')
+      end
+    end
 
     def app_tables
       ActiveRecord::Base.connection.tables - ['schema_migrations']
@@ -45,7 +59,7 @@ module Starter
     end
 
     def available_styles
-      Dir["bootstrap-css/*"].entries
+      Dir["bootstrap-css/*"].entries.push('default')
     end
   end
 end

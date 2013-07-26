@@ -1,11 +1,31 @@
 Description:
-    Injects a bootswatch with FontAwesome support into your app.
+    Injects the Bootstrap framework, FontAwesome support, and a standard application layout template into your app.
 
-    BOOTSWATCH_NAME must be one of:
-        amelia, cerulian, cyborg, journal, geo, readable, simplex, slate, spacelab, spruce, superhero, united
+    The application layout will provide a standard top navbar based on the models already in your application, with support for flash messages.
+
+    Specify "default" as the THEME_NAME to use the default bootstrap theme.  Or, provide a Bootswatch name instead.
+
+
+    THEME_NAME can be one of:
+        amelia, cerulian, cyborg, default, journal, geo, readable, simplex, slate, spacelab, spruce, superhero, united
 
     LAYOUT_FILE defaults to "application".
 
+    WARNING: You will LOSE any modifications you've made to your application layout unless you specify a different filename with the --layout-file option.
+
 Examples:
+    `rails generate starter:style default`
+
+    Injects Bootstrap 2.3 into your CSS folder, adjusts your applications' css manifest, and replaces your application layout with a standard Bootstrap template and a navigation bar based on your models.
+
+    `rails generate starter:style --no-navbar`
+
+    Injects Bootstrap 2.3 into your CSS folder, adjusts your applications' css manifest, and replaces your application layout with a standard Bootstrap template.
+
     `rails generate starter:style united`
+
+      Injects Bootstrap 2.3 into your CSS folder, adjusts your applications' css manifest, and replaces your application layout with a standard Bootstrap template that uses the United bootswatch theme.
+
+
+
 
