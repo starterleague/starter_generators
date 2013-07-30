@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Jeff Cohen"]
   spec.email         = ["jeff@starterleague.com"]
   spec.description   = %q{Generators for class.}
-  spec.summary       = %q{Generators for class.}
+  spec.summary       = %q{Helpful enhancements to the Rails environment for beginner-focused classes.}
   spec.homepage      = ""
   spec.license       = "MIT"
 
