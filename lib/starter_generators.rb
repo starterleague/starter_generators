@@ -1,5 +1,6 @@
 require "starter_generators/version"
 
 module StarterGenerators
-  # Your code goes here...
+  require 'starter_generators/railtie' if defined?(Rails)
+
 end
