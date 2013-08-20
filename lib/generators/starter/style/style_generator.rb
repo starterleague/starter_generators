@@ -18,6 +18,7 @@ module Starter
         gsub_file 'app/assets/stylesheets/application.css', /^\s*\*= require bootstrap.min \./, ''
 
       else
+        gsub_file 'app/assets/stylesheets/application.css', /^\s*\*= require_tree \./, ''
         template 'bootstrap.min.css', 'app/assets/stylesheets/bootstrap.min.css', verbose: false
         inject_into_file "app/assets/stylesheets/application.css", " *= require bootstrap.min\n", before: /^\s*\*\//, verbose: false
         log :insert, 'Bootstrap CSS framework'
