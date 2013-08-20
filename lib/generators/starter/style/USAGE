@@ -16,15 +16,15 @@ Description:
 Examples:
     `rails generate starter:style default`
 
-    Injects Bootstrap 2.3 into your CSS folder, adjusts your applications' css manifest, and replaces your application layout with a standard Bootstrap template and a navigation bar based on your models.
+    Injects Bootstrap 3.0 into your CSS folder, adjusts your applications' css manifest, and replaces your application layout with a standard Bootstrap template and a navigation bar based on your models.
 
     `rails generate starter:style --no-navbar`
 
-    Injects Bootstrap 2.3 into your CSS folder, adjusts your applications' css manifest, and replaces your application layout with a standard Bootstrap template.
+    Injects Bootstrap 3.0 into your CSS folder, adjusts your applications' css manifest, and replaces your application layout with a standard Bootstrap template.
 
     `rails generate starter:style united`
 
-      Injects Bootstrap 2.3 into your CSS folder, adjusts your applications' css manifest, and replaces your application layout with a standard Bootstrap template that uses the United bootswatch theme.
+      Injects Bootstrap 3.0 into your CSS folder, adjusts your applications' css manifest, and replaces your application layout with the United bootswatch theme.
 
 
 
