@@ -12,7 +12,7 @@ module Starter
     remove_class_option :force_plural
     remove_class_option :skip_namespace
     class_option :named_routes, :type => :boolean, :default => true
-    class_option :styled, :type => :boolean, :default => true, desc: 'Generates bootstrap-ready view templates'
+    class_option :styled, :type => :boolean, :default => false, desc: 'Generates bootstrap-ready view templates'
 
     def generate_controller
       template 'controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"

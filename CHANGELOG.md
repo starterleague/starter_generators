@@ -1,3 +1,8 @@
+## Version 0.8.0 (July 26, 2013)
+* Bootstrap 3.0
+* Horizontal form CSS applied when using --styled
+* styler generator removes require_tree directive from application.css
+
 ## Version 0.7.3 (July 26, 2013)
 * Remove footer from layout to avoid bootstrap grid weirdness
 
