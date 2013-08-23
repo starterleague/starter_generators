@@ -4,13 +4,12 @@
   <meta charset="utf-8">
   <title><%= application_name %></title>
 
-  <%%= stylesheet_link_tag    "application", :media => "all" %>
-
 <% if bootswatch_theme? -%>
   <link href="//netdna.bootstrapcdn.com/bootswatch/3.0.0/<%= theme_name %>/bootstrap.min.css" rel="stylesheet">
 <% end -%>
   <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
 
+  <%%= stylesheet_link_tag    "application", :media => "all" %>
   <%%= javascript_include_tag "application" %>
   <%%= csrf_meta_tags %>
 

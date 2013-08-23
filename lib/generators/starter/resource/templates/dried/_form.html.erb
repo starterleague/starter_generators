@@ -1,0 +1,13 @@
+<%%= form_for @<%= singular_table_name %> do |f| %>
+
+<% attributes.each do |attribute| -%>
+  <div>
+    <%%= f.label :<%= attribute.name %> %><br>
+    <%%= f.<%= attribute.field_type %> :<%= attribute.name %><%= "?" if attribute.type == :boolean %> %>
+  </div>
+
+<% end -%>
+  <div>
+    <%%= f.submit %>
+  </div>
+<%% end %>

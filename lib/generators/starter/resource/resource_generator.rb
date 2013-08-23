@@ -13,9 +13,14 @@ module Starter
     remove_class_option :skip_namespace
     class_option :named_routes, :type => :boolean, :default => true
     class_option :styled, :type => :boolean, :default => false, desc: 'Generates bootstrap-ready view templates'
+    class_option :dry, :type => :boolean, :default => false, desc: 'DRYs up the controller, views, and routes'
 
     def generate_controller
-      template 'controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"
+      if dry?
+        template 'dried/controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"
+      else
+        template 'controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"
+      end
     end
 
     def generate_model
@@ -39,88 +44,94 @@ module Starter
 
 
     def generate_routes
-      if named_routes?
+      if dry?
+        route "resources :#{plural_name}", "Named RESTful routes"
+      elsif named_routes?
         route golden_7_named, "Named RESTful routes"
       else
         route golden_7, "RESTful routes"
       end
     end
 
-protected
+  protected
 
-  def golden_7
-    ["# Routes for the #{singular_name.capitalize} resource:",
+    def golden_7
+      ["# Routes for the #{singular_name.capitalize} resource:",
+          "  # CREATE",
+          "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new'",
+          "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
+          "",
+          "  # READ",
+          "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
+          "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show'",
+          "",
+          "  # UPDATE",
+          "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit'",
+          "  patch '/#{plural_name}/:id', controller: '#{plural_name}', action: 'update'",
+          "",
+          "  # DELETE",
+          "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
+          "  ##{'-' * 30}"
+        ].join("\n")
+    end
+
+    def golden_7_named
+      ["# Routes for the #{singular_name.capitalize} resource:",
         "  # CREATE",
-        "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new'",
+        "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new', as: 'new_#{singular_name}'",
         "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
         "",
         "  # READ",
         "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
-        "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show'",
+        "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show', as: '#{singular_name}'",
         "",
         "  # UPDATE",
-        "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit'",
+        "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit', as: 'edit_#{singular_name}'",
         "  patch '/#{plural_name}/:id', controller: '#{plural_name}', action: 'update'",
         "",
         "  # DELETE",
         "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
         "  ##{'-' * 30}"
-      ].join("\n")
-  end
-
-  def golden_7_named
-    ["# Routes for the #{singular_name.capitalize} resource:",
-      "  # CREATE",
-      "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new', as: 'new_#{singular_name}'",
-      "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
-      "",
-      "  # READ",
-      "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
-      "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show', as: '#{singular_name}'",
-      "",
-      "  # UPDATE",
-      "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit', as: 'edit_#{singular_name}'",
-      "  patch '/#{plural_name}/:id', controller: '#{plural_name}', action: 'update'",
-      "",
-      "  # DELETE",
-      "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
-      "  ##{'-' * 30}"
-      ].join("\n")
-  end
-
-  def named_routes?
-    options[:named_routes]
-  end
-
-  def styled?
-    options[:styled]
-  end
-
-  # Override of Rails::Generators::Actions
-  def route(routing_code, title)
-    log :route, title
-    sentinel = /\.routes\.draw do(?:\s*\|map\|)?\s*$/
-
-    in_root do
-      inject_into_file 'config/routes.rb', "\n  #{routing_code}\n", { :after => sentinel, :verbose => false }
+        ].join("\n")
     end
-  end
 
-  def attributes_with_index
-    attributes.select { |a| a.has_index? || (a.reference? && options[:indexes]) }
-  end
-
-  def available_views
-    %w(index new edit show)
-  end
-
-  def view_filename_with_extensions(name)
-    filename = [name, :html, :erb].compact.join(".")
-    if styled?
-      filename = File.join("bootstrapped", filename)
+    def dry?
+      options[:dry]
     end
-    filename
-  end
 
+    def named_routes?
+      options[:named_routes]
+    end
+
+    def styled?
+      options[:styled]
+    end
+
+    # Override of Rails::Generators::Actions
+    def route(routing_code, title)
+      log :route, title
+      sentinel = /\.routes\.draw do(?:\s*\|map\|)?\s*$/
+
+      in_root do
+        inject_into_file 'config/routes.rb', "\n  #{routing_code}\n", { :after => sentinel, :verbose => false }
+      end
+    end
+
+    def attributes_with_index
+      attributes.select { |a| a.has_index? || (a.reference? && options[:indexes]) }
+    end
+
+    def available_views
+      dry? ? %w(index new edit show _form) : %w(index new edit show)
+    end
+
+    def view_filename_with_extensions(name)
+      filename = [name, :html, :erb].compact.join(".")
+      folders = []
+      folders << 'dried' if dry?
+      folders << 'bootstrapped' if styled?
+      filename = File.join(folders, filename) if folders.any?
+      return filename
+    end
   end
 end

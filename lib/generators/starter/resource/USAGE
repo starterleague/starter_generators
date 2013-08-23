@@ -27,8 +27,8 @@ Description:
     in config/routes.rb.
 
     If you want to remove all the generated files, first rollback your migration
-    if you've already run 'rake db:migrate'.  Then run
-    'rails destroy resource ModelName'.
+    with 'rake db:rollback' if you've already run 'rake db:migrate'.  Then run
+    'rails destroy starter:resource ModelName'.
 
 Examples:
     `rails generate starter:resource post title body:text published:boolean`
