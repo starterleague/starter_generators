@@ -1,4 +1,7 @@
-## Version 0.8.0 (July 26, 2013)
+## Version 0.9.0 (August 22, 2013)
+* New --dry option to get scaffold-like refactoring (but without mass assignment)
+*
+## Version 0.8.0 (August 20, 2013)
 * Bootstrap 3.0
 * Horizontal form CSS applied when using --styled
 * styler generator removes require_tree directive from application.css
