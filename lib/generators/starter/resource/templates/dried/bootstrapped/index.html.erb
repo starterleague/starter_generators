@@ -5,7 +5,7 @@
 <% if named_routes? -%>
 <p><%%= link_to 'Add a New <%= human_name.titleize %>', new_<%= singular_table_name %>_url, class: 'btn btn-primary' %></p>
 <% else -%>
-<p><%%= link_to 'Add a New <%= human_name.titleize %>', "/<%= plural_name %>/new", class: 'btn' %></p>
+<p><%%= link_to 'Add a New <%= human_name.titleize %>', "/<%= plural_name %>/new", class: 'btn btn-primary' %></p>
 <% end -%>
 
 <table class="table table-hover">
@@ -27,12 +27,12 @@
       <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
   <% end -%>
 <% if named_routes? %>
-      <td><%%= link_to 'Show', <%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn' %></td>
-      <td><%%= link_to 'Edit', edit_<%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn' %></td>
+      <td><%%= link_to 'Show', <%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn btn-primary' %></td>
+      <td><%%= link_to 'Edit', edit_<%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn btn-warning' %></td>
       <td><%%= link_to 'Destroy', <%= singular_table_name %>_url(<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %></td>
 <% else %>
-      <td><%%= link_to 'Show', "/<%= plural_name %>/#{<%= singular_table_name %>.id}", class: 'btn' %></td>
-      <td><%%= link_to 'Edit', "/<%= plural_name %>/#{<%= singular_table_name %>.id}/edit", class: 'btn' %></td>
+      <td><%%= link_to 'Show', "/<%= plural_name %>/#{<%= singular_table_name %>.id}", class: 'btn btn-primary' %></td>
+      <td><%%= link_to 'Edit', "/<%= plural_name %>/#{<%= singular_table_name %>.id}/edit", class: 'btn btn-warning' %></td>
       <td><%%= link_to 'Destroy', "/<%= plural_name %>/#{<%= singular_table_name %>.id}", method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %></td>
 <% end %>
     </tr>

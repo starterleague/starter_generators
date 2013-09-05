@@ -1,6 +1,6 @@
 ## Version 0.9.1 (Sept 4, 2013)
-* Fixes #17, Typo: In index template, closing tbody tag is </body> instead of </tbody>
-*
+* Fixed #17, Typo: In index template, closing tbody tag is </body> instead of </tbody>
+* Fixed
 
 ## Version 0.9.0 (August 22, 2013)
 * New --dry option to get scaffold-like refactoring (but without mass assignment)
