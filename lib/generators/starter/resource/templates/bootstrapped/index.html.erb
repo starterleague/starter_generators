@@ -31,9 +31,9 @@
       <td><%%= link_to '<i class="icon-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn btn-warning' %></td>
       <td><%%= link_to '<i class="icon-trash"></i>'.html_safe, <%= singular_table_name %>_url(<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %></td>
 <% else %>
-      <td><%%= link_to '<i class="icon-zoom-in"></i>', "/<%= plural_name %>/#{<%= singular_table_name %>.id}", class: 'btn btn-primary' %></td>
-      <td><%%= link_to '<i class="icon-edit"></i>', "/<%= plural_name %>/#{<%= singular_table_name %>.id}/edit", class: 'btn btn-warning' %></td>
-      <td><%%= link_to '<i class="icon-trash"></i>', "/<%= plural_name %>/#{<%= singular_table_name %>.id}", method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %></td>
+      <td><%%= link_to '<i class="icon-zoom-in"></i>'.html_safe, "/<%= plural_name %>/#{<%= singular_table_name %>.id}", class: 'btn btn-primary' %></td>
+      <td><%%= link_to '<i class="icon-edit"></i>'.html_safe, "/<%= plural_name %>/#{<%= singular_table_name %>.id}/edit", class: 'btn btn-warning' %></td>
+      <td><%%= link_to '<i class="icon-trash"></i>'.html_safe, "/<%= plural_name %>/#{<%= singular_table_name %>.id}", method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %></td>
 <% end %>
     </tr>
   <%% end %>

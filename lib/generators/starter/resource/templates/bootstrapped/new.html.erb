@@ -7,7 +7,11 @@
 <% attributes.each do |attribute| -%>
   <div class="form-group">
     <%%= label_tag :<%= attribute.name %>, nil, class: 'col-md-2 control-label' %>
-    <div class="col-md-6">
+    <%
+      colsize = 6
+      colsize = 2 if attribute.type == :integer
+    %>
+    <div class="col-md-<%= colsize %>">
       <%%= <%= attribute.field_type %>_tag :<%= attribute.name %><%= "?" if attribute.type == :boolean %>, nil, class: 'form-control' %>
     </div>
   </div>

@@ -1,14 +1,18 @@
-<%%= form_for(@<%= singular_table_name %>, class: 'form-horizontal') do |f| %>
+<%%= form_for(@<%= singular_table_name %>, html: { class: 'form-horizontal'}) do |f| %>
 
 <% attributes.each do |attribute| -%>
   <div class="form-group">
-    <%%= f.label :<%= attribute.name %>, class: 'col-md-2 control-label' %>
-    <div class="col-md-6">
+    <%%= f.label :<%= attribute.name %>, class: 'col-md-2' %>
+    <%
+      colsize = 6
+      colsize = 2 if attribute.type == :integer
+    %>
+    <div class="col-md-<%= colsize %>">
       <%%= f.<%= attribute.field_type %> :<%= attribute.name %><%= "?" if attribute.type == :boolean %>, class: 'form-control' %>
     </div>
   </div>
 
-  <% end -%>
+<% end -%>
   <div class="form-group">
     <div class="col-md-offset-2 col-md-6">
       <%%= f.submit nil, class: 'btn btn-primary' %>
