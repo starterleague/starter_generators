@@ -1,7 +1,9 @@
 ## Version 0.9.1 (Sept 4, 2013)
 * Fixed #17, Typo: In index template, closing tbody tag is </body> instead of </tbody>
 * Fixed #15, add .btn-primary or .btn-warning instead of just .btn
-* Fixed #
+* Slightly improved form layouts
+* Fixed #14 to use icons in index template when bootstrapped
+
 
 ## Version 0.9.0 (August 22, 2013)
 * New --dry option to get scaffold-like refactoring (but without mass assignment)
