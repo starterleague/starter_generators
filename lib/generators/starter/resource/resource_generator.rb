@@ -12,10 +12,13 @@ module Starter
     remove_class_option :force_plural
     remove_class_option :skip_namespace
     class_option :named_routes, :type => :boolean, :default => true
+    class_option :skip_model, :type => :boolean, :default => false
+    class_option :skip_controller, :type => :boolean, :default => false
     class_option :styled, :type => :boolean, :default => false, desc: 'Generates bootstrap-ready view templates'
     class_option :dry, :type => :boolean, :default => false, desc: 'DRYs up the controller, views, and routes'
 
     def generate_controller
+      return if options[:skip_controller]
       if dry?
         template 'dried/controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"
       else
@@ -24,10 +27,12 @@ module Starter
     end
 
     def generate_model
+      return if options[:skip_model]
       template 'model.rb', "app/models/#{singular_name.underscore}.rb"
     end
 
     def generate_migration
+      return if options[:skip_model]
       migration_template "migration.rb", "db/migrate/create_#{table_name}.rb"
     end
 
@@ -44,6 +49,7 @@ module Starter
 
 
     def generate_routes
+      return if options[:skip_controller]
       if dry?
         route "resources :#{plural_name}", "Named RESTful routes"
       elsif named_routes?

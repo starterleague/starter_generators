@@ -1,3 +1,6 @@
+## Version 0.9.2 (Oct 22, 2013)
+* Added skip_controller and skip_model options (default: false)
+
 ## Version 0.9.1 (Sept 4, 2013)
 * Fixed #17, Typo: In index template, closing tbody tag is </body> instead of </tbody>
 * Fixed #15, add .btn-primary or .btn-warning instead of just .btn
