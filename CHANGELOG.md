@@ -1,3 +1,7 @@
+## Version 0.9.3 (Oct 30, 2013)
+* Change find_by_id to find_by(:id => params[:id])
+* Change named routes to use old-style hash syntax
+
 ## Version 0.9.2 (Oct 22, 2013)
 * Added skip_controller and skip_model options (default: false)
 
