@@ -1,3 +1,6 @@
+## Version 0.9.4 (Nov 3, 2013)
+* Don't create instance var in new action
+
 ## Version 0.9.3 (Oct 30, 2013)
 * Change find_by_id to find_by(:id => params[:id])
 * Change named routes to use old-style hash syntax

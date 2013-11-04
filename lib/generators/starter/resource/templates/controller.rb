@@ -9,7 +9,6 @@ class <%= plural_name.camelize %>Controller < ApplicationController
   end
 
   def new
-    @<%= singular_name.underscore %> = <%= class_name %>.new
   end
 
   def create
