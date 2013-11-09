@@ -16,43 +16,40 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="#"><%= application_name %></a>
-      </div>
-      <div class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-<% if options[:navbar] %>
-          <li><%%= link_to "Home", "/" %></li>
-<% app_tables.each do |table_name| -%>
-          <li><%%= link_to "<%= table_name.humanize.titleize %>", "/<%= table_name %>" %></li>
-<% end -%>
-          <li><a href="#about">About</a></li>
-<% end -%>
-        </ul>
-      </div>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%%= link_to Rails.application.class.parent_name, root_url, :class => "navbar-brand" %>
     </div>
-  </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+<% if options[:navbar] -%>
+<% app_tables.each do |table_name| -%>
+        <li><%%= link_to "<%= table_name.humanize.titleize %>", <%= table_name.pluralize %>_url %></li>
+<% end -%>
+        <li><a href="#">About</a></li>
+<% end -%>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </nav>
 
   <div class="container">
-
-    <%% if flash[:notice].present? %>
-    <div class="alert alert-dismissable alert-success">
-      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-      <%%= notice %>
-    </div>
+    <%% if notice.present? %>
+      <div class="alert alert-dismissable alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%%= notice %>
+      </div>
     <%% end %>
 
     <%%= yield %>
-
   </div>
-
 </body>
 </html>
