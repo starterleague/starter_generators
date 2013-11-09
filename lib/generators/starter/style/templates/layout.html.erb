@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title><%= application_name %></title>
+  <title><%= Rails.application.class.parent_name %></title>
 
 <% if bootswatch_theme? -%>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/<%= theme_name %>/bootstrap.min.css">
