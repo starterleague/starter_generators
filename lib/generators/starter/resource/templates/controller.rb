@@ -46,13 +46,13 @@ class <%= plural_name.camelize %>Controller < ApplicationController
     if @<%= singular_name.underscore %>.save
       redirect_to <%= plural_name %>_url, notice: "<%= singular_name.humanize %> updated successfully."
     else
-      render 'new'
+      render 'edit'
     end
 <% else -%>
     if @<%= singular_name.underscore %>.save
       redirect_to "/<%= plural_name %>", notice: "<%= singular_name.humanize %> updated successfully."
     else
-      render 'new'
+      render 'edit'
     end
 <% end -%>
   end
