@@ -3,24 +3,24 @@
 </div>
 
 <%%= form_tag(<%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'patch', class: 'form-horizontal') do %>
-
-  <% attributes.each do |attribute| -%>
-<div class="form-group">
+<% attributes.each do |attribute| -%>
+  <div class="form-group">
     <%%= label_tag :<%= attribute.name %>, nil, class: 'col-md-2 control-label' %>
-    <%
-      colsize = 6
-      colsize = 2 if attribute.type == :integer
-    %>
-    <div class="col-md-<%= colsize %>">
-      <%%= <%= attribute.field_type %>_tag :<%= attribute.name %>, @<%= singular_table_name %>.<%= attribute.name %><%= "?" if attribute.type == :boolean %>, class: 'form-control'%>
+    <div class="col-md-6">
+<% if attribute.field_type == :date_select || attribute.field_type == :time_select || attribute.field_type == :datetime_select -%>
+      <%%= text_field_tag :<%= attribute.name %>, @<%= singular_table_name %>.<%= attribute.name %>, class: 'form-control' %>
+<% elsif attribute.field_type == :check_box -%>
+      <%%= check_box_tag :<%= attribute.name %>, 1, @<%= singular_table_name %>.<%= attribute.name %>? %>
+<% else -%>
+      <%%= <%= attribute.field_type %>_tag :<%= attribute.name %>, @<%= singular_table_name %>.<%= attribute.name %>, class: 'form-control' %>
+<% end -%>
     </div>
   </div>
 
-  <% end %>
-    <div class="form-group">
+<% end -%>
+  <div class="form-group">
     <div class="col-md-offset-2 col-md-6">
-          <%%= submit_tag "Update <%= human_name.titleize %>", class: 'btn btn-primary' %>
+      <%%= submit_tag "Update <%= human_name.titleize %>", class: 'btn btn-primary' %>
     </div>
   </div>
-
 <%% end %>
