@@ -1,3 +1,9 @@
+## Version 0.9.5 (Nov 12, 2013)
+* Added notices to redirects in controller
+* Made something show up in index and show for false boolean values
+* Cleaned up Bootstrapped views. Still have not done dried views
+* Cleaned up view nitpicks. Switched to new hash syntax in controller.
+*
 ## Version 0.9.4 (Nov 3, 2013)
 * Don't create instance var in new action
 
