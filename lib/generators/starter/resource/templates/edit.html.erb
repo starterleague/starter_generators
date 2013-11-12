@@ -1,19 +1,24 @@
 <h1>Editing <%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
 
-<% if named_routes? %>
+<% if named_routes? -%>
 <%%= form_tag(<%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'patch') do %>
-<% else %>
+<% else -%>
 <%%= form_tag("/<%= plural_name %>/#{<%= singular_table_name %>.id}", method: 'patch') do %>
-<% end %>
-  <% attributes.each do |attribute| -%>
-<div>
+<% end -%>
+<% attributes.each do |attribute| -%>
+  <div>
     <%%= label_tag :<%= attribute.name %> %><br />
+<% if attribute.field_type == :date_select || attribute.field_type == :time_select || attribute.field_type == :datetime_select -%>
+    <%%= text_field_tag :<%= attribute.name %>, @<%= singular_table_name %>.<%= attribute.name %> %>
+<% elsif attribute.field_type == :check_box -%>
+    <%%= check_box_tag :<%= attribute.name %>, 1, @<%= singular_table_name %>.<%= attribute.name %><%= "?" %> %>
+<% else -%>
     <%%= <%= attribute.field_type %>_tag :<%= attribute.name %>, @<%= singular_table_name %>.<%= attribute.name %><%= "?" if attribute.type == :boolean %> %>
+<% end -%>
   </div>
 
-  <% end %>
+<% end -%>
   <div>
     <%%= submit_tag "Update <%= human_name.titleize %>" %>
   </div>
-
 <%% end %>

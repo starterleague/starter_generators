@@ -12,7 +12,7 @@
       colsize = 2 if attribute.type == :integer
     %>
     <div class="col-md-<%= colsize %>">
-      <%%= <%= attribute.field_type %>_tag :<%= attribute.name %><%= "?" if attribute.type == :boolean %>, nil, class: 'form-control' %>
+      <%%= <%= attribute.field_type %>_tag :<%= attribute.name %>, nil, class: 'form-control' %>
     </div>
   </div>
 

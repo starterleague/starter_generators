@@ -5,7 +5,7 @@ class <%= plural_name.camelize %>Controller < ApplicationController
   end
 
   def show
-    @<%= singular_name.underscore %> = <%= class_name %>.find_by(:id => params[:id])
+    @<%= singular_name.underscore %> = <%= class_name %>.find_by(id: params[:id])
   end
 
   def new
@@ -32,11 +32,11 @@ class <%= plural_name.camelize %>Controller < ApplicationController
   end
 
   def edit
-    @<%= singular_name.underscore %> = <%= class_name %>.find_by(:id => params[:id])
+    @<%= singular_name.underscore %> = <%= class_name %>.find_by(id: params[:id])
   end
 
   def update
-    @<%= singular_name.underscore %> = <%= class_name %>.find_by(:id => params[:id])
+    @<%= singular_name.underscore %> = <%= class_name %>.find_by(id: params[:id])
     <% attributes.each do |attribute| -%>
 @<%= singular_name.underscore %>.<%= attribute.name %> = params[:<%= attribute.name %>]
     <% end %>
@@ -56,7 +56,7 @@ class <%= plural_name.camelize %>Controller < ApplicationController
   end
 
   def destroy
-    @<%= singular_name.underscore %> = <%= class_name %>.find_by(:id => params[:id])
+    @<%= singular_name.underscore %> = <%= class_name %>.find_by(id: params[:id])
     @<%= singular_name.underscore %>.destroy
 <% if named_routes? -%>
     redirect_to <%= plural_name %>_url
