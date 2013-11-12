@@ -3,7 +3,7 @@
 <dl>
 <% attributes.each do |attribute| -%>
   <dt><%= attribute.human_name %></dt>
-  <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
+  <dd><%%= @<%= singular_table_name %>.<%= attribute.name %><%= "?" if attribute.type == :boolean %> %></dd>
 
 <% end -%>
 </dl>
