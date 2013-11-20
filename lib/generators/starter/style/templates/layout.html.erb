@@ -43,8 +43,8 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
 <% if options[:navbar] -%>
-<% app_tables.each do |table_name| -%>
-        <li><%%= link_to "<%= table_name.humanize.titleize %>", <%= table_name.pluralize %>_url %></li>
+<% app_resources.each do |resource| -%>
+        <li><%%= link_to "<%= resource.humanize.titleize %>", <%= resource %>_url %></li>
 <% end -%>
         <li><a href="#">About</a></li>
 <% end -%>

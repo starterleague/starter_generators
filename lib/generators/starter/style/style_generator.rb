@@ -26,8 +26,10 @@ module Starter
       end
     end
 
-    def app_tables
-      ActiveRecord::Base.connection.tables - ['schema_migrations']
+    def app_resources
+      routes = Rails.application.routes.routes
+      names = routes.map(&:name).uniq.compact
+      names.reject! { |name| /^rails_info.*/.match(name) || name.pluralize != name }
     end
 
   end
