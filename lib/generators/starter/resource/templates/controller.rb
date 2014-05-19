@@ -25,7 +25,7 @@ class <%= plural_name.camelize %>Controller < ApplicationController
     end
 <% else -%>
     if @<%= singular_name.underscore %>.save
-      redirect_to "/<%= plural_name %>", notice: "<%= singular_name.humanize %> created successfully."
+      redirect_to "/<%= plural_name %>", :notice => "<%= singular_name.humanize %> created successfully."
     else
       render 'new'
     end
@@ -50,7 +50,7 @@ class <%= plural_name.camelize %>Controller < ApplicationController
     end
 <% else -%>
     if @<%= singular_name.underscore %>.save
-      redirect_to "/<%= plural_name %>", notice: "<%= singular_name.humanize %> updated successfully."
+      redirect_to "/<%= plural_name %>", :notice => "<%= singular_name.humanize %> updated successfully."
     else
       render 'edit'
     end
@@ -64,7 +64,7 @@ class <%= plural_name.camelize %>Controller < ApplicationController
 <% if named_routes? -%>
     redirect_to <%= plural_name %>_url, notice: "<%= singular_name.humanize %> deleted."
 <% else -%>
-    redirect_to "/<%= plural_name %>", notice: "<%= singular_name.humanize %> deleted."
+    redirect_to "/<%= plural_name %>", :notice => "<%= singular_name.humanize %> deleted."
 <% end -%>
   end
 end
