@@ -11,10 +11,10 @@ module Starter
     remove_class_option :old_style_hash
     remove_class_option :force_plural
     remove_class_option :skip_namespace
-    class_option :named_routes, :type => :boolean, :default => true
+    class_option :named_routes, :type => :boolean, :default => false
     class_option :skip_model, :type => :boolean, :default => false
     class_option :skip_controller, :type => :boolean, :default => false
-    class_option :styled, :type => :boolean, :default => false, desc: 'Generates bootstrap-ready view templates'
+    class_option :styled, :type => :boolean, :default => true, desc: 'Generates bootstrap-ready view templates'
     class_option :dry, :type => :boolean, :default => false, desc: 'DRYs up the controller, views, and routes'
 
     def generate_controller
@@ -65,7 +65,7 @@ module Starter
       ["# Routes for the #{singular_name.capitalize} resource:",
           "  # CREATE",
           "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new'",
-          "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
+          "  get '/create_#{singular_name}', controller: '#{plural_name}', action: 'create'",
           "",
           "  # READ",
           "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
@@ -73,10 +73,10 @@ module Starter
           "",
           "  # UPDATE",
           "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit'",
-          "  patch '/#{plural_name}/:id', controller: '#{plural_name}', action: 'update'",
+          "  get '/update_#{singular_name}/:id', controller: '#{plural_name}', action: 'update'",
           "",
           "  # DELETE",
-          "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
+          "  get '/delete_#{singular_name}/:id', controller: '#{plural_name}', action: 'destroy'",
           "  ##{'-' * 30}"
         ].join("\n")
     end
