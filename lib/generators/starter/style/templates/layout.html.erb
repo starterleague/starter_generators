@@ -49,6 +49,16 @@
         <li><a href="#">About</a></li>
 <% end -%>
       </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <%% if false %>
+          <li><a href="/users/edit">Oscar the Grouch</a></li>
+          <li><a href="/users/sign_out" data-method="delete">Sign out</a></li>
+        <%% else %>
+          <li><a href="/users/sign_up">Sign up</a></li>
+          <li><a href="/users/sign_in">Sign in</a></li>
+        <%% end %>
+      </ul>
     </div><!-- /.navbar-collapse -->
   </nav>
 
