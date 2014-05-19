@@ -36,7 +36,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <%%= link_to Rails.application.class.parent_name, root_url, :class => "navbar-brand" %>
+      <a href="/" class="navbar-brand"><%%= Rails.application.class.parent_name %></a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
@@ -44,7 +44,7 @@
       <ul class="nav navbar-nav">
 <% if options[:navbar] -%>
 <% app_resources.each do |resource| -%>
-        <li><%%= link_to "<%= resource.humanize.titleize %>", <%= resource %>_url %></li>
+        <li><a href="/<%= resource %>"><%= resource.humanize.titleize %></a></li>
 <% end -%>
         <li><a href="#">About</a></li>
 <% end -%>
