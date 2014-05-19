@@ -5,7 +5,7 @@
 <% if named_routes? -%>
 <p><%%= link_to 'Add a New <%= human_name.titleize %>', new_<%= singular_table_name %>_url, class: 'btn btn-primary' %></p>
 <% else -%>
-<p><%%= link_to 'Add a New <%= human_name.titleize %>', "/<%= plural_name %>/new", class: 'btn btn-primary' %></p>
+<p><a href="/<%= plural_name %>/new" class="btn btn-primary">Add a New <%= human_name.titleize %></a></p>
 <% end -%>
 
 <table class="table table-hover">
