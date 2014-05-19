@@ -14,20 +14,20 @@
         </label>
       </div>
     </div>
-<% else %>
+<% else -%>
     <label for="<%= attribute.name %>" class="col-sm-2 control-label">
       <%= attribute.name.humanize %>
     </label>
     <div class="col-sm-10">
-<% if attribute.field_type == :textarea %>
+<% if attribute.field_type == :textarea -%>
       <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"></textarea>
-<% else %>
+<% else -%>
       <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control">
-<% end %>
+<% end -%>
     </div>
-<% end %>
+<% end -%>
   </div>
-<% end %>
+<% end -%>
 
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
