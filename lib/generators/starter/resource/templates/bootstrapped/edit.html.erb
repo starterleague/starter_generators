@@ -2,8 +2,18 @@
   <h1>Edit <%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
 </div>
 
+<%% if @<%= singular_table_name %>.errors.any? %>
+  <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%%= message %>
+    </div>
+  <%% end %>
+<%% end %>
+
 <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="form-horizontal">
 <% attributes.each do |attribute| -%>
+  <!-- Label and input for <%= attribute.name %> -->
   <div class="form-group">
 <% if attribute.field_type == :check_box -%>
     <div class="col-sm-offset-2 col-sm-10">
@@ -27,8 +37,8 @@
     </div>
 <% end -%>
   </div>
-<% end -%>
 
+<% end -%>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <input type="submit" value="Update <%= human_name.titleize %>" class="btn btn-primary">

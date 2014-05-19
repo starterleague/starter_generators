@@ -1,15 +1,26 @@
 <div class="page-header">
-  <h1>Add A <%= human_name.titleize %></h1>
+  <h1>Add <%= human_name.titleize %></h1>
 </div>
+
+<%% if @<%= singular_table_name %>.errors.any? %>
+  <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%%= message %>
+    </div>
+  <%% end %>
+<%% end %>
+
 
 <form action="/create_<%= singular_table_name %>" class="form-horizontal">
 <% attributes.each do |attribute| -%>
+  <!-- Label and input for <%= attribute.name %> -->
   <div class="form-group">
 <% if attribute.field_type == :check_box -%>
     <div class="col-sm-offset-2 col-sm-10">
       <div class="checkbox">
         <label for="<%= attribute.name %>">
-          <input type="checkbox" id="<%= attribute.name %>" name="<%= attribute.name %>" value="1">
+          <input type="checkbox" id="<%= attribute.name %>" name="<%= attribute.name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.name %> %>>
           <%= attribute.name.humanize %>
         </label>
       </div>
@@ -20,15 +31,15 @@
     </label>
     <div class="col-sm-10">
 <% if attribute.field_type == :text_area -%>
-      <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"></textarea>
+      <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3" value="<%%= @<%= singular_table_name %>.<%= attribute.name %> %>"></textarea>
 <% else -%>
-      <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control">
+      <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.name %> %>">
 <% end -%>
     </div>
 <% end -%>
   </div>
-<% end -%>
 
+<% end -%>
   <div class="form-group">
     <div class="col-sm-offset-2 col-sm-10">
       <input type="submit" value="Create <%= human_name.titleize %>" class="btn btn-primary">
