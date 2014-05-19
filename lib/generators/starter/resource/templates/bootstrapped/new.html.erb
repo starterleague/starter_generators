@@ -31,7 +31,7 @@
     </label>
     <div class="col-sm-10">
 <% if attribute.field_type == :text_area -%>
-      <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3" value="<%%= @<%= singular_table_name %>.<%= attribute.name %> %>"></textarea>
+      <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></textarea>
 <% else -%>
       <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.name %> %>">
 <% end -%>
