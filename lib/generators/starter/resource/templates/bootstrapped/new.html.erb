@@ -19,7 +19,7 @@
       <%= attribute.name.humanize %>
     </label>
     <div class="col-sm-10">
-<% if attribute.field_type == :textarea -%>
+<% if attribute.field_type == :text_area -%>
       <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"></textarea>
 <% else -%>
       <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control">
