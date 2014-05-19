@@ -64,19 +64,19 @@ module Starter
     def golden_7
       ["# Routes for the #{singular_name.capitalize} resource:",
           "  # CREATE",
-          "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new'",
-          "  get '/create_#{singular_name}', controller: '#{plural_name}', action: 'create'",
+          "  get('/#{plural_name}/new', { :controller => '#{plural_name}', :action => 'new' })",
+          "  get('/create_#{singular_name}', { :controller => '#{plural_name}', :action => 'create' })",
           "",
           "  # READ",
-          "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
-          "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show'",
+          "  get('/#{plural_name}', { :controller => '#{plural_name}', :action => 'index' })",
+          "  get('/#{plural_name}/:id', { :controller => '#{plural_name}', :action => 'show' })",
           "",
           "  # UPDATE",
-          "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit'",
-          "  get '/update_#{singular_name}/:id', controller: '#{plural_name}', action: 'update'",
+          "  get('/#{plural_name}/:id/edit', { :controller => '#{plural_name}', :action => 'edit' })",
+          "  get('/update_#{singular_name}/:id', { :controller => '#{plural_name}', :action => 'update' })",
           "",
           "  # DELETE",
-          "  get '/delete_#{singular_name}/:id', controller: '#{plural_name}', action: 'destroy'",
+          "  get('/delete_#{singular_name}/:id', { :controller => '#{plural_name}', :action => 'destroy' })",
           "  ##{'-' * 30}"
         ].join("\n")
     end
