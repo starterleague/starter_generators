@@ -1,5 +1,4 @@
 class <%= plural_name.camelize %>Controller < ApplicationController
-
   def index
     @<%= plural_name.underscore %> = <%= class_name %>.all
   end
@@ -38,6 +37,7 @@ class <%= plural_name.camelize %>Controller < ApplicationController
 
   def update
     @<%= singular_name.underscore %> = <%= class_name %>.find(params[:id])
+
 <% attributes.each do |attribute| -%>
     @<%= singular_name.underscore %>.<%= attribute.name %> = params[:<%= attribute.name %>]
 <% end -%>
@@ -59,6 +59,7 @@ class <%= plural_name.camelize %>Controller < ApplicationController
 
   def destroy
     @<%= singular_name.underscore %> = <%= class_name %>.find(params[:id])
+
     @<%= singular_name.underscore %>.destroy
 
 <% if named_routes? -%>
