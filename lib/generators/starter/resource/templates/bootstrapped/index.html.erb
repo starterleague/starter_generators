@@ -2,53 +2,101 @@
   <h1><%= plural_table_name.humanize %></h1>
 </div>
 
+<div class="row">
+  <div class="col-md-12">
 <% if named_routes? -%>
-<p><%%= link_to 'Add a New <%= human_name.titleize %>', new_<%= singular_table_name %>_url, class: 'btn btn-primary' %></p>
+    <p><%%= link_to 'Add a New <%= human_name.titleize %>', new_<%= singular_table_name %>_url, class: 'btn btn-primary' %></p>
 <% else -%>
-<p><a href="/<%= plural_name %>/new" class="btn btn-primary">Add a New <%= human_name.titleize %></a></p>
+    <p><a href="/<%= plural_name %>/new" class="btn btn-primary">Add a New <%= human_name.titleize %></a></p>
 <% end -%>
+  </div>
+</div>
 
-<table class="table table-hover">
-  <thead>
-    <tr>
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-hover">
+      <thead>
+        <tr>
 <% attributes.each do |attribute| -%>
-      <th><%= attribute.human_name %></th>
+          <th><%= attribute.human_name %></th>
 <% end -%>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-      <tr>
+      <tbody>
+        <%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+          <tr>
 <% attributes.each do |attribute| -%>
-        <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+            <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
 <% end -%>
 <% if named_routes? -%>
-        <td><%%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, <%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn btn-primary' %></td>
-        <td><%%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn btn-warning' %></td>
-        <td><%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, <%= singular_table_name %>_url(<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %></td>
+            <td><%%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, <%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn btn-primary' %></td>
+            <td><%%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn btn-warning' %></td>
+            <td><%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, <%= singular_table_name %>_url(<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %></td>
 <% else -%>
-        <td>
+            <td>
+              <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
+            </td>
+            <td>
+              <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+            </td>
+            <td>
+              <a href="/delete_<%= singular_table_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+            </td>
+<% end -%>
+          </tr>
+        <%% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+<div class="row">
+<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= human_name.titleize %> #<%%= <%= singular_table_name %>.id %></h3>
+      </div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+<% attributes.each do |attribute| -%>
+          <dt><%= attribute.human_name %></dt>
+          <dd><%%= <%= singular_table_name %>.<%= attribute.name %> %></dd>
+
+<% end -%>
+        </dl>
+        <div class="btn-group btn-group-justified">
+<% if named_routes? -%>
+          <%%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, <%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn btn-primary' %>
+          <%%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(<%= singular_table_name %>), class: 'btn btn-warning' %>
+          <%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, <%= singular_table_name %>_url(<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %>
+<% else -%>
           <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-primary">
             <i class="fa fa-search-plus"></i>
           </a>
-        </td>
-        <td>
+
           <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>/edit" class="btn btn-warning">
             <i class="fa fa-edit"></i>
           </a>
-        </td>
-        <td>
+
           <a href="/delete_<%= singular_table_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-danger">
             <i class="fa fa-trash-o"></i>
           </a>
-        </td>
 <% end -%>
-      </tr>
-    <%% end %>
-  </tbody>
-</table>
-
+        </div>
+      </div>
+    </div>
+  </div>
+<%% end %>
+</div>

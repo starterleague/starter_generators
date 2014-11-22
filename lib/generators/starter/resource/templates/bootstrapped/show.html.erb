@@ -10,7 +10,30 @@
       <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
 
 <% end -%>
+      <dt></dt>
+      <dd>
+        <div class="btn-group">
+<% if named_routes? -%>
+          <%%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, @<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-primary' %>
+          <%%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-warning' %>
+          <%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, @<%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %>
+<% else -%>
+          <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-primary">
+            <i class="fa fa-search-plus"></i>
+          </a>
+
+          <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-warning">
+            <i class="fa fa-edit"></i>
+          </a>
+
+          <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-danger">
+            <i class="fa fa-trash-o"></i>
+          </a>
+<% end -%>
+        </div>
+      </dd>
     </dl>
+
   </div>
 </div>
 
@@ -25,11 +48,30 @@
           <div class="col-md-12">
             <dl class="dl-horizontal">
 <% attributes.each do |attribute| -%>
-          <dt><%= attribute.human_name %></dt>
-          <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
+              <dt><%= attribute.human_name %></dt>
+              <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
 
 <% end -%>
             </dl>
+            <div class="btn-group btn-group-justified">
+<% if named_routes? -%>
+              <%%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, @<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-primary' %>
+              <%%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-warning' %>
+              <%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, @<%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %>
+<% else -%>
+              <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-primary">
+                <i class="fa fa-search-plus"></i>
+              </a>
+
+              <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-warning">
+                <i class="fa fa-edit"></i>
+              </a>
+
+              <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-danger">
+                <i class="fa fa-trash-o"></i>
+              </a>
+<% end -%>
+            </div>
           </div>
         </div>
       </div>
