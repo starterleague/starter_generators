@@ -2,10 +2,37 @@
   <h1><%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
 </div>
 
-<dl class="dl-horizontal">
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
 <% attributes.each do |attribute| -%>
-  <dt><%= attribute.human_name %></dt>
-  <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
+      <dt><%= attribute.human_name %></dt>
+      <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
 
 <% end -%>
-</dl>
+    </dl>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-md-12">
+            <dl class="dl-horizontal">
+<% attributes.each do |attribute| -%>
+          <dt><%= attribute.human_name %></dt>
+          <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
+
+<% end -%>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
