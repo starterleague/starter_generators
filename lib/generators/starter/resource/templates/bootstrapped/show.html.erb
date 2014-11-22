@@ -14,12 +14,12 @@
       <dd>
         <div class="btn-group">
 <% if named_routes? -%>
-          <%%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, @<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-primary' %>
+          <%%= link_to '<i class="fa fa-chevron-left"></i>'.html_safe, <%= plural_name %>_url, class: 'btn btn-primary' %>
           <%%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-warning' %>
-          <%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, @<%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %>
+          <%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, <%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %>
 <% else -%>
-          <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
+          <a href="/<%= plural_name %>" class="btn btn-primary">
+            <i class="fa fa-chevron-left"></i>
           </a>
 
           <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-warning">
@@ -38,7 +38,7 @@
 </div>
 
 <div class="row">
-  <div class="col-md-offset-3 col-md-6">
+  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"><%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h3>
@@ -55,12 +55,12 @@
             </dl>
             <div class="btn-group btn-group-justified">
 <% if named_routes? -%>
-              <%%= link_to '<i class="fa fa-search-plus"></i>'.html_safe, @<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-primary' %>
+              <%%= link_to '<i class="fa fa-chevron-left"></i>'.html_safe, <%= plural_name %>_url, class: 'btn btn-primary' %>
               <%%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-warning' %>
-              <%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, @<%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %>
+              <%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, <%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %>
 <% else -%>
-              <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-primary">
-                <i class="fa fa-search-plus"></i>
+              <a href="/<%= plural_name %>" class="btn btn-primary">
+                <i class="fa fa-chevron-left"></i>
               </a>
 
               <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-warning">
