@@ -1,7 +1,3 @@
-<div class="page-header">
-  <h1>Edit <%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
-</div>
-
 <%% if @<%= singular_table_name %>.errors.any? %>
   <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
@@ -11,37 +7,91 @@
   <%% end %>
 <%% end %>
 
-<form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="form-horizontal">
+<div class="page-header">
+  <h1>Edit <%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="form-horizontal">
 <% attributes.each do |attribute| -%>
-  <!-- Label and input for <%= attribute.name %> -->
-  <div class="form-group">
+      <!-- Label and input for <%= attribute.name %> -->
+      <div class="form-group">
 <% if attribute.field_type == :check_box -%>
-    <div class="col-sm-offset-2 col-sm-10">
-      <div class="checkbox">
-        <label for="<%= attribute.name %>">
-          <input type="checkbox" id="<%= attribute.name %>" name="<%= attribute.name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.name %> %>>
+        <div class="col-sm-offset-2 col-sm-10">
+          <div class="checkbox">
+            <label for="<%= attribute.name %>">
+              <input type="checkbox" id="<%= attribute.name %>" name="<%= attribute.name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.name %> %>>
+              <%= attribute.name.humanize %>
+            </label>
+          </div>
+        </div>
+<% else -%>
+        <label for="<%= attribute.name %>" class="col-sm-2 control-label">
           <%= attribute.name.humanize %>
         </label>
-      </div>
-    </div>
-<% else -%>
-    <label for="<%= attribute.name %>" class="col-sm-2 control-label">
-      <%= attribute.name.humanize %>
-    </label>
-    <div class="col-sm-10">
+        <div class="col-sm-10">
 <% if attribute.field_type == :text_area -%>
-      <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></textarea>
+          <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></textarea>
 <% else -%>
-      <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.name %> %>">
+          <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.name %> %>">
 <% end -%>
-    </div>
+        </div>
 <% end -%>
-  </div>
+      </div>
 
 <% end -%>
-  <div class="form-group">
-    <div class="col-sm-offset-2 col-sm-10">
-      <input type="submit" value="Update <%= human_name.titleize %>" class="btn btn-primary">
+      <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+          <input type="submit" value="Update <%= human_name.titleize %>" class="btn btn-primary">
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-offset-3 col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Add <%= human_name.titleize %></h3>
+      </div>
+      <div class="panel-body">
+        <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="form-horizontal">
+<% attributes.each do |attribute| -%>
+          <!-- Label and input for <%= attribute.name %> -->
+          <div class="form-group">
+<% if attribute.field_type == :check_box -%>
+            <div class="col-sm-offset-2 col-sm-10">
+              <div class="checkbox">
+                <label for="<%= attribute.name %>">
+                  <input type="checkbox" id="<%= attribute.name %>" name="<%= attribute.name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.name %> %>>
+                  <%= attribute.name.humanize %>
+                </label>
+              </div>
+            </div>
+<% else -%>
+            <label for="<%= attribute.name %>" class="col-sm-2 control-label">
+              <%= attribute.name.humanize %>
+            </label>
+            <div class="col-sm-10">
+<% if attribute.field_type == :text_area -%>
+              <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></textarea>
+<% else -%>
+              <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.name %> %>">
+<% end -%>
+            </div>
+<% end -%>
+          </div>
+
+<% end -%>
+          <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+              <input type="submit" value="Update <%= human_name.titleize %>" class="btn btn-primary">
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
   </div>
-</form>
+</div>
