@@ -1,3 +1,5 @@
+<!-- Validation failure messages -->
+
 <%% if @<%= singular_table_name %>.errors.any? %>
   <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
@@ -6,6 +8,9 @@
     </div>
   <%% end %>
 <%% end %>
+
+
+<!-- Simple full-width example -->
 
 <div class="page-header">
   <h1>Edit <%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
@@ -51,6 +56,10 @@
     </form>
   </div>
 </div>
+
+<!-- End simple full-width example-->
+
+<!-- Responsive panel example -->
 
 <div class="row">
   <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
@@ -99,3 +108,6 @@
     </div>
   </div>
 </div>
+
+
+<!-- End responsive panel example -->
