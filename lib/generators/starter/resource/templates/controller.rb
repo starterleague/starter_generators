@@ -45,7 +45,7 @@ class <%= plural_name.camelize %>Controller < ApplicationController
 
 <% if named_routes? -%>
     if @<%= singular_name.underscore %>.save
-      redirect_to <%= singular_name %>_url(<%= singular_name %>.id), :notice => "<%= singular_name.humanize %> updated successfully."
+      redirect_to <%= singular_name %>_url(@<%= singular_name %>.id), :notice => "<%= singular_name.humanize %> updated successfully."
     else
       render 'edit'
     end
