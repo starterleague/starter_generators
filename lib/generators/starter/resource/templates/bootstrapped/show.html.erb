@@ -16,9 +16,15 @@
       <dd>
         <div class="btn-group">
 <% if named_routes? -%>
-          <%%= link_to '<i class="fa fa-chevron-left"></i>'.html_safe, <%= plural_name %>_url, class: 'btn btn-primary' %>
-          <%%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-warning' %>
-          <%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, <%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %>
+          <%%= link_to <%= plural_name %>_url, :class => "btn btn-primary" do %>
+            <i class="fa fa-chevron-left"></i>
+          <%% end %>
+          <%%= link_to edit_<%= singular_table_name %>_url(@<%= singular_table_name %>.id), :class => "btn btn-warning" do %>
+            <i class="fa fa-edit"></i>
+          <%% end %>
+          <%%= link_to <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "delete", :data => { :confirm => "Do you really want to delete this <%= singular_table_name %>?" }, :class => "btn btn-danger" do %>
+            <i class="fa fa-trash-o"></i>
+          <%% end %>
 <% else -%>
           <a href="/<%= plural_name %>" class="btn btn-primary">
             <i class="fa fa-chevron-left"></i>
@@ -61,9 +67,15 @@
             </dl>
             <div class="btn-group btn-group-justified">
 <% if named_routes? -%>
-              <%%= link_to '<i class="fa fa-chevron-left"></i>'.html_safe, <%= plural_name %>_url, class: 'btn btn-primary' %>
-              <%%= link_to '<i class="fa fa-edit"></i>'.html_safe, edit_<%= singular_table_name %>_url(@<%= singular_table_name %>), class: 'btn btn-warning' %>
-              <%%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, <%= singular_table_name %>_url(@<%= singular_table_name %>), method: 'delete', data: { confirm: "Do you really want to delete this <%= singular_table_name %>?" }, class: 'btn btn-danger' %>
+              <%%= link_to <%= plural_name %>_url, :class => "btn btn-primary" do %>
+                <i class="fa fa-chevron-left"></i>
+              <%% end %>
+              <%%= link_to edit_<%= singular_table_name %>_url(@<%= singular_table_name %>.id), :class => "btn btn-warning" do %>
+                <i class="fa fa-edit"></i>
+              <%% end %>
+              <%%= link_to <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "delete", :data => { :confirm => "Do you really want to delete this <%= singular_table_name %>?" }, :class => "btn btn-danger" do %>
+                <i class="fa fa-trash-o"></i>
+              <%% end %>
 <% else -%>
               <a href="/<%= plural_name %>" class="btn btn-primary">
                 <i class="fa fa-chevron-left"></i>
