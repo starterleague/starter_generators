@@ -19,7 +19,7 @@
 <div class="row">
   <div class="col-md-12">
 <% if named_routes? -%>
-    <%%= form_tag <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "patch", :class => "form-horizontal" %>
+    <%%= form_tag <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "patch", :class => "form-horizontal" do %>
 <% else -%>
     <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="form-horizontal">
 <% end -%>
@@ -81,7 +81,7 @@
       </div>
       <div class="panel-body">
 <% if named_routes? -%>
-        <%%= form_tag <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "patch", :class => "form-horizontal" %>
+        <%%= form_tag <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "patch", :class => "form-horizontal" do %>
 <% else -%>
         <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="form-horizontal">
 <% end -%>
