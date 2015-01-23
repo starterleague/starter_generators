@@ -53,7 +53,11 @@
         <div class="col-sm-offset-2 col-sm-10">
           <input type="submit" value="Create <%= human_name.titleize %>" class="btn btn-success">
           or
+<% if named_routes? -%>
+          <%% link_to "Cancel", <%= plural_name %>_url %>
+<% else -%>
           <a href="/<%= plural_name %>">Cancel</a>
+<% end -%>
         </div>
       </div>
 <% if named_routes? -%>
