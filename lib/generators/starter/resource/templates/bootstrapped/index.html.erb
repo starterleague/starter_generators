@@ -132,6 +132,8 @@
 </div>
 
 <!-- JavaScript for Isotope layout and quicksearch -->
+<!-- JavaScript for Isotope layout and quicksearch -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js"></script>
 <script>
   $(function() {
@@ -139,12 +141,16 @@
     var qsRegex;
 
     // init Isotope
-    var $container = $('.isotope-container').isotope({
-      itemSelector: '.isotope-item',
-      layoutMode: 'masonry',
-      filter: function() {
-        return qsRegex ? $(this).text().match( qsRegex ) : true;
-      }
+    var $container = $('.isotope-container');
+
+    $container.imagesLoaded(function() {
+      $container.isotope({
+        itemSelector: '.isotope-item',
+        layoutMode: 'masonry',
+        filter: function() {
+          return qsRegex ? $(this).text().match( qsRegex ) : true;
+        }
+      })
     });
 
     // use value of search field to filter
