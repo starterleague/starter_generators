@@ -19,9 +19,9 @@
       </div>
       <div class="panel-body">
 <% if named_routes? -%>
-        <%%= form_tag <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "patch", :class => "form-horizontal" do %>
+        <%%= form_tag(<%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "patch", :class => "form-horizontal") do %>
 <% else -%>
-        <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="form-horizontal">
+        <%%= form_tag("/<%= plural_name %>/#{@<%= singular_table_name %>.id}"), :method => "patch", :class => "form-horizontal") do %>
 <% end -%>
 <% attributes.each do |attribute| -%>
           <!-- Label and input for <%= attribute.name %> -->
@@ -61,11 +61,7 @@
 <% end -%>
             </div>
           </div>
-<% if named_routes? -%>
         <%% end %>
-<% else -%>
-        </form>
-<% end -%>
       </div>
     </div>
   </div>

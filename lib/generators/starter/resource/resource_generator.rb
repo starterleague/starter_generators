@@ -11,7 +11,7 @@ module Starter
     remove_class_option :old_style_hash
     remove_class_option :force_plural
     remove_class_option :skip_namespace
-    class_option :named_routes, :type => :boolean, :default => true
+    class_option :named_routes, :type => :boolean, :default => false
     class_option :skip_model, :type => :boolean, :default => false
     class_option :skip_controller, :type => :boolean, :default => false
     class_option :styled, :type => :boolean, :default => true, desc: 'Generates bootstrap-ready view templates'

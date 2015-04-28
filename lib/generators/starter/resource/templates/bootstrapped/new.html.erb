@@ -19,9 +19,9 @@
       </div>
       <div class="panel-body">
 <% if named_routes? -%>
-        <%%= form_tag <%= plural_name %>_url, :method => "post", :class => "form-horizontal" do %>
+        <%%= form_tag(<%= plural_name %>_url, :method => "post", :class => "form-horizontal") do %>
 <% else -%>
-        <form action="/create_<%= singular_table_name %>" class="form-horizontal">
+        <%%= form_tag("/<%= plural_name %>", :method => "post", :class => "form-horizontal") do %>
 <% end -%>
 <% attributes.each do |attribute| -%>
           <!-- Label and input for <%= attribute.name %> -->
@@ -57,11 +57,7 @@
               <a href="/<%= plural_name %>">Cancel</a>
             </div>
           </div>
-<% if named_routes? -%>
         <%% end %>
-<% else -%>
-        </form>
-<% end -%>
       </div>
     </div>
   </div>
