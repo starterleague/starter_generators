@@ -29,38 +29,40 @@
 </head>
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a href="/" class="navbar-brand"><%= Rails.application.class.parent_name %></a>
-    </div>
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand"><%= Rails.application.class.parent_name %></a>
+      </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
 <% if options[:navbar] -%>
 <% app_resources.each do |resource| -%>
-        <li><a href="/<%= resource %>"><%= resource.humanize.titleize %></a></li>
+          <li><a href="/<%= resource %>"><%= resource.humanize.titleize %></a></li>
 <% end -%>
-        <li><a href="#">About</a></li>
+          <li><a href="#">About</a></li>
 <% end -%>
-      </ul>
+        </ul>
 
-      <ul class="nav navbar-nav navbar-right">
-        <%% if 1 > 2 %>
-          <li><a href="/users/edit">Oscar the Grouch</a></li>
-          <li><a href="/users/sign_out" data-method="delete">Sign out</a></li>
-        <%% else %>
-          <li><a href="/users/sign_up">Sign up</a></li>
-          <li><a href="/users/sign_in">Sign in</a></li>
-        <%% end %>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+        <ul class="nav navbar-nav navbar-right">
+          <%% if 1 > 2 %>
+            <li><a href="/users/edit">Oscar the Grouch</a></li>
+            <li><a href="/users/sign_out" data-method="delete">Sign out</a></li>
+          <%% else %>
+            <li><a href="/users/sign_up">Sign up</a></li>
+            <li><a href="/users/sign_in">Sign in</a></li>
+          <%% end %>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
   </nav>
 
   <div class="container">
