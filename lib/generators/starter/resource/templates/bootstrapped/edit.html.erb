@@ -55,7 +55,9 @@
 <% end -%>
           <div class="form-group">
             <div class="col-sm-offset-2 col-sm-10">
-              <input type="submit" value="Update <%= human_name.titleize %>" class="btn btn-warning">
+              <button class="btn btn-warning">
+                Update <%= human_name.titleize %>
+              </button>
               or
 <% if named_routes? -%>
               <%%= link_to "Cancel", <%= singular_table_name %>_url(@<%= singular_table_name %>.id) %>
