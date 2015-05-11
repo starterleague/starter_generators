@@ -21,7 +21,9 @@
 <% if named_routes? -%>
         <%%= form_tag(<%= plural_name %>_url, :method => "post", :class => "form-horizontal") do %>
 <% else -%>
-        <%%= form_tag("/<%= plural_name %>", :method => "post", :class => "form-horizontal") do %>
+        <form action="/create_<%= singular_table_name %>" method="post">
+          <!-- Hidden input for authenticity token to protect from forgery -->
+          <input name="authenticity_token" type="hidden" value="<%%= form_authenticity_token %>">
 <% end -%>
 <% attributes.each do |attribute| -%>
           <!-- Label and input for <%= attribute.name %> -->
@@ -57,7 +59,11 @@
               <a href="/<%= plural_name %>">Cancel</a>
             </div>
           </div>
+<% if named_routes? -%>
         <%% end %>
+<% else -%>
+        </form>
+<% end -%>
       </div>
     </div>
   </div>
