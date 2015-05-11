@@ -21,9 +21,10 @@
 <% if named_routes? -%>
         <%%= form_tag(<%= plural_name %>_url, :method => "post", :class => "form-horizontal") do %>
 <% else -%>
-        <form action="/create_<%= singular_table_name %>" method="post">
+        <form action="/create_<%= singular_table_name %>" method="post" class="form-horizontal">
           <!-- Hidden input for authenticity token to protect from forgery -->
           <input name="authenticity_token" type="hidden" value="<%%= form_authenticity_token %>">
+
 <% end -%>
 <% attributes.each do |attribute| -%>
           <!-- Label and input for <%= attribute.name %> -->
