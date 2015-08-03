@@ -14,103 +14,47 @@
 <!-- Responsive, Isotope-based layout example -->
 
 <div class="row">
-  <div class="col-xs-12">
-    <input type="text" id="quicksearch" placeholder="Search <%= plural_table_name.humanize %> (start typing)" class="form-control">
-  </div>
-</div>
-
-<hr>
-
-<div class="row isotope-container">
-<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
-  <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 isotope-item">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= human_name.titleize %> #<%%= <%= singular_table_name %>.id %></h3>
-      </div>
-      <div class="panel-body">
-        <dl>
+  <table class="table table-striped table-hover">
+    <tr>
 <% attributes.each do |attribute| -%>
-          <dt><%= attribute.human_name %></dt>
-          <dd><%%= <%= singular_table_name %>.<%= attribute.name %> %></dd>
-
+      <th><%= attribute.human_name %></th>
 <% end -%>
-        </dl>
+      <th>Actions</th>
+    </tr>
+
+<%% @<%= plural_table_name %>.each do |<%= singular_table_name %>| %>
+    <tr>
+<% attributes.each do |attribute| -%>
+      <td><%%= <%= singular_table_name %>.<%= attribute.name %> %></td>
+<% end -%>
+      <td>
         <div class="btn-group btn-group-justified">
 <% if named_routes? -%>
           <%%= link_to <%= singular_table_name %>_url(<%= singular_table_name %>), :class => "btn btn-primary" do %>
-            <i class="fa fa-search-plus"></i>
+            Show
           <%% end %>
           <%%= link_to edit_<%= singular_table_name %>_url(<%= singular_table_name %>), :class => "btn btn-warning" do %>
-            <i class="fa fa-edit"></i>
+            Edit
           <%% end %>
           <%%= link_to <%= singular_table_name %>_url(<%= singular_table_name %>), :method => "delete", :data => { :confirm => "Do you really want to delete this <%= singular_table_name %>?" }, :class => "btn btn-danger" do %>
-            <i class="fa fa-trash-o"></i>
+            Delete
           <%% end %>
 <% else -%>
           <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-primary">
-            <i class="fa fa-search-plus"></i>
+            Show
           </a>
 
           <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>/edit" class="btn btn-warning">
-            <i class="fa fa-edit"></i>
+            Edit
           </a>
 
           <a href="/delete_<%= singular_table_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-danger" rel="nofollow">
-            <i class="fa fa-trash-o"></i>
+            Delete
           </a>
 <% end -%>
         </div>
-      </div>
-    </div>
-  </div>
+      </td>
+    </tr>
 <%% end %>
+  </table>
 </div>
-
-<!-- You can ignore the following. It's a quick and dirty example of how to get a Pinterest-style layout with quick search. -->
-<!-- JavaScript for Isotope layout and quicksearch -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/3.1.8/imagesloaded.pkgd.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.0.0/isotope.pkgd.min.js"></script>
-<script>
-  $(function() {
-    // quick search regex
-    var qsRegex;
-
-    // init Isotope
-    var $container = $('.isotope-container');
-
-    $container.imagesLoaded(function() {
-      $container.isotope({
-        itemSelector: '.isotope-item',
-        layoutMode: 'masonry',
-        filter: function() {
-          return qsRegex ? $(this).text().match( qsRegex ) : true;
-        }
-      })
-    });
-
-    // use value of search field to filter
-    var $quicksearch = $('#quicksearch').keyup( debounce( function() {
-      qsRegex = new RegExp( $quicksearch.val(), 'gi' );
-      $container.isotope();
-    }, 200 ) );
-
-  });
-
-  // debounce so filtering doesn't happen every millisecond
-  function debounce( fn, threshold ) {
-    var timeout;
-    return function debounced() {
-      if ( timeout ) {
-        clearTimeout( timeout );
-      }
-      function delayed() {
-        fn();
-        timeout = null;
-      }
-      timeout = setTimeout( delayed, threshold || 100 );
-    }
-  }
-</script>
-
-<!-- End responsive, Isotope-based layout example -->
