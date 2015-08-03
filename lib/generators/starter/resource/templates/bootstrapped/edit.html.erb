@@ -9,72 +9,56 @@
   <%% end %>
 <%% end %>
 
-<!-- Responsive panel example -->
-
-<div class="row">
-  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Edit <%= singular_table_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h3>
-      </div>
-      <div class="panel-body">
-<% if named_routes? -%>
-        <%%= form_tag(<%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "patch", :class => "form-horizontal") do %>
-<% else -%>
-        <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" method="post" class="form-horizontal">
-          <!-- Hidden input for authenticity token to protect from forgery -->
-          <input name="authenticity_token" type="hidden" value="<%%= form_authenticity_token %>">
-
-<% end -%>
-<% attributes.each do |attribute| -%>
-          <!-- Label and input for <%= attribute.name %> -->
-          <div class="form-group">
-<% if attribute.field_type == :check_box -%>
-            <div class="col-sm-offset-2 col-sm-10">
-              <div class="checkbox">
-                <label for="<%= attribute.name %>">
-                  <input type="checkbox" id="<%= attribute.name %>" name="<%= attribute.name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.name %> %>>
-                  <%= attribute.name.humanize %>
-                </label>
-              </div>
-            </div>
-<% else -%>
-            <label for="<%= attribute.name %>" class="col-sm-2 control-label">
-              <%= attribute.name.humanize %>
-            </label>
-            <div class="col-sm-10">
-<% if attribute.field_type == :text_area -%>
-              <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></textarea>
-<% else -%>
-              <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.name %> %>">
-<% end -%>
-            </div>
-<% end -%>
-          </div>
-
-<% end -%>
-          <div class="form-group">
-            <div class="col-sm-offset-2 col-sm-10">
-              <button class="btn btn-warning">
-                Update <%= human_name.titleize %>
-              </button>
-              or
-<% if named_routes? -%>
-              <%%= link_to "Cancel", <%= singular_table_name %>_url(@<%= singular_table_name %>.id) %>
-<% else -%>
-              <a href="/<%= plural_name  %>/<%%= @<%= singular_table_name %>.id %>">Cancel</a>
-<% end -%>
-            </div>
-          </div>
-<% if named_routes? -%>
-        <%% end %>
-<% else -%>
-        </form>
-<% end -%>
-      </div>
-    </div>
-  </div>
+<div class="page-header">
+  <h3>Edit <%= singular_table_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h3>
 </div>
 
+<div class="row">
+  <div class="col-md-12">
+<% if named_routes? -%>
+    <%%= form_tag(<%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "patch") do %>
+<% else -%>
+    <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" method="post" class="form-horizontal">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%%= form_authenticity_token %>">
+<% end -%>
 
-<!-- End responsive panel example -->
+<% attributes.each do |attribute| -%>
+      <!-- Label and input for <%= attribute.name %> -->
+      <div class="form-group">
+<% if attribute.field_type == :check_box -%>
+        <div class="checkbox">
+          <label for="<%= attribute.name %>">
+            <input type="checkbox" id="<%= attribute.name %>" name="<%= attribute.name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.name %> %>>
+            <%= attribute.name.humanize %>
+          </label>
+        </div>
+<% else -%>
+        <label for="<%= attribute.name %>" class="control-label">
+          <%= attribute.name.humanize %>
+        </label>
+<% if attribute.field_type == :text_area -%>
+        <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></textarea>
+<% else -%>
+        <input type="text" id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" value="<%%= @<%= singular_table_name %>.<%= attribute.name %> %>">
+<% end -%>
+      </div>
+<% end -%>
+
+<% end -%>
+      <button class="btn btn-warning">
+        Update <%= human_name.titleize %>
+      </button>
+      or
+<% if named_routes? -%>
+      <%%= link_to "Cancel", <%= singular_table_name %>_url(@<%= singular_table_name %>.id) %>
+<% else -%>
+      <a href="/<%= plural_name  %>/<%%= @<%= singular_table_name %>.id %>">Cancel</a>
+<% end -%>
+<% if named_routes? -%>
+    <%% end %>
+<% else -%>
+    </form>
+<% end -%>
+  </div>
+</div>
