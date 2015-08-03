@@ -38,17 +38,9 @@
             Delete
           <%% end %>
 <% else -%>
-          <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-primary">
-            Show
-          </a>
-
-          <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>/edit" class="btn btn-warning">
-            Edit
-          </a>
-
-          <a href="/delete_<%= singular_table_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-danger" rel="nofollow">
-            Delete
-          </a>
+          <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-primary">Show</a>
+          <a href="/<%= plural_name %>/<%%= <%= singular_table_name %>.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_<%= singular_table_name %>/<%%= <%= singular_table_name %>.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
 <% end -%>
         </td>
       </tr>
