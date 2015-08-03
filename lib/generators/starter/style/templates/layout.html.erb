@@ -5,11 +5,11 @@
   <title><%= Rails.application.class.parent_name %></title>
 
 <% if bootswatch_theme? -%>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.4/<%= theme_name %>/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/<%= theme_name %>/bootstrap.min.css">
 <% else %>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <% end -%>
-  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <style>
     /* Only necessary if you are using navbar-fixed-top */
@@ -22,7 +22,7 @@
   <%%= javascript_include_tag "application" %>
   <%%= csrf_meta_tags %>
 
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -48,18 +48,13 @@
 <% app_resources.each do |resource| -%>
           <li><a href="/<%= resource %>"><%= resource.humanize.titleize %></a></li>
 <% end -%>
-          <li><a href="#">About</a></li>
+          <li><a href="/rails/info">About</a></li>
 <% end -%>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
-          <%% if 1 > 2 %>
-            <li><a href="/users/edit">Oscar the Grouch</a></li>
-            <li><a href="/users/sign_out" data-method="delete" rel="nofollow">Sign out</a></li>
-          <%% else %>
-            <li><a href="/users/sign_up">Sign up</a></li>
-            <li><a href="/users/sign_in">Sign in</a></li>
-          <%% end %>
+          <li><a href="/users/edit">Dummy Edit Profile Link</a></li>
+          <li><a href="/users/sign_out" data-method="delete" rel="nofollow">Dummy Sign Out Link</a></li>
         </ul>
       </div><!-- /.navbar-collapse -->
     </div>
