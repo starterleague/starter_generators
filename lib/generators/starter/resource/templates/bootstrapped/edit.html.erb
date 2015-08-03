@@ -17,7 +17,7 @@
 <% if named_routes? -%>
     <%%= form_tag(<%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "patch") do %>
 <% else -%>
-    <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" method="post" class="form-horizontal">
+    <form action="/update_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" method="post">
       <!-- Hidden input for authenticity token to protect from forgery -->
       <input name="authenticity_token" type="hidden" value="<%%= form_authenticity_token %>">
 <% end -%>
