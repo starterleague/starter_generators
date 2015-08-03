@@ -1,5 +1,4 @@
 <!-- Validation failure messages -->
-
 <%% if @<%= singular_table_name %>.errors.any? %>
   <%% @<%= singular_table_name %>.errors.full_messages.each do |message| %>
     <div class="alert alert-dismissable alert-danger">
@@ -25,18 +24,19 @@
 
 <% attributes.each do |attribute| -%>
       <!-- Label and input for <%= attribute.name %> -->
-      <div class="form-group">
 <% if attribute.field_type == :check_box -%>
-        <div class="checkbox">
-          <label for="<%= attribute.name %>">
-            <input type="checkbox" id="<%= attribute.name %>" name="<%= attribute.name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.name %> %>>
-            <%= attribute.name.humanize %>
-          </label>
-        </div>
+      <div class="checkbox">
+        <label for="<%= attribute.name %>">
+          <input type="checkbox" id="<%= attribute.name %>" name="<%= attribute.name %>" value="1" <%%= "checked" if @<%= singular_table_name %>.<%= attribute.name %> %>>
+          <%= attribute.name.humanize %>
+        </label>
+      </div>
 <% else -%>
+      <div class="form-group">
         <label for="<%= attribute.name %>" class="control-label">
           <%= attribute.name.humanize %>
         </label>
+
 <% if attribute.field_type == :text_area -%>
         <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></textarea>
 <% else -%>
