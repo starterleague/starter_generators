@@ -11,10 +11,10 @@ module Starter
     remove_class_option :old_style_hash
     remove_class_option :force_plural
     remove_class_option :skip_namespace
-    class_option :named_routes, :type => :boolean, :default => true
+    class_option :named_routes, :type => :boolean, :default => false
     class_option :skip_model, :type => :boolean, :default => false
     class_option :skip_controller, :type => :boolean, :default => false
-    class_option :styled, :type => :boolean, :default => false, desc: 'Generates bootstrap-ready view templates'
+    class_option :styled, :type => :boolean, :default => true, desc: 'Generates bootstrap-ready view templates'
     class_option :dry, :type => :boolean, :default => false, desc: 'DRYs up the controller, views, and routes'
 
     def generate_controller
@@ -63,40 +63,40 @@ module Starter
 
     def golden_7
       ["# Routes for the #{singular_name.capitalize} resource:",
-          "  # CREATE",
-          "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new'",
-          "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create'",
-          "",
-          "  # READ",
-          "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
-          "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show'",
-          "",
-          "  # UPDATE",
-          "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit'",
-          "  patch '/#{plural_name}/:id', controller: '#{plural_name}', action: 'update'",
-          "",
-          "  # DELETE",
-          "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
-          "  ##{'-' * 30}"
+        "  # CREATE",
+        "  get \"/#{plural_name}/new\", :controller => \"#{plural_name}\", :action => \"new\"",
+        "  post \"/create_#{singular_name}\", :controller => \"#{plural_name}\", :action => \"create\"",
+        "",
+        "  # READ",
+        "  get \"/#{plural_name}\", :controller => \"#{plural_name}\", :action => \"index\"",
+        "  get \"/#{plural_name}/:id\", :controller => \"#{plural_name}\", :action => \"show\"",
+        "",
+        "  # UPDATE",
+        "  get \"/#{plural_name}/:id/edit\", :controller => \"#{plural_name}\", :action => \"edit\"",
+        "  post \"/update_#{singular_name}/:id\", :controller => \"#{plural_name}\", :action => \"update\"",
+        "",
+        "  # DELETE",
+        "  get \"/delete_#{singular_name}/:id\", :controller => \"#{plural_name}\", :action => \"destroy\"",
+        "  ##{'-' * 30}"
         ].join("\n")
     end
 
     def golden_7_named
       ["# Routes for the #{singular_name.capitalize} resource:",
         "  # CREATE",
-        "  get '/#{plural_name}/new', controller: '#{plural_name}', action: 'new', as: 'new_#{singular_name}'",
-        "  post '/#{plural_name}', controller: '#{plural_name}', action: 'create', as: '#{plural_name}'",
+        "  get '/#{plural_name}/new',      :controller => '#{plural_name}', :action => 'new',    :as => 'new_#{singular_name}'",
+        "  post '/#{plural_name}',         :controller => '#{plural_name}', :action => 'create', :as => '#{plural_name}'",
         "",
         "  # READ",
-        "  get '/#{plural_name}', controller: '#{plural_name}', action: 'index'",
-        "  get '/#{plural_name}/:id', controller: '#{plural_name}', action: 'show', as: '#{singular_name}'",
+        "  get '/#{plural_name}',          :controller => '#{plural_name}', :action => 'index'",
+        "  get '/#{plural_name}/:id',      :controller => '#{plural_name}', :action => 'show',   :as => '#{singular_name}'",
         "",
         "  # UPDATE",
-        "  get '/#{plural_name}/:id/edit', controller: '#{plural_name}', action: 'edit', as: 'edit_#{singular_name}'",
-        "  patch '/#{plural_name}/:id', controller: '#{plural_name}', action: 'update'",
+        "  get '/#{plural_name}/:id/edit', :controller => '#{plural_name}', :action => 'edit',   :as => 'edit_#{singular_name}'",
+        "  patch '/#{plural_name}/:id',    :controller => '#{plural_name}', :action => 'update'",
         "",
         "  # DELETE",
-        "  delete '/#{plural_name}/:id', controller: '#{plural_name}', action: 'destroy'",
+        "  delete '/#{plural_name}/:id',   :controller => '#{plural_name}', :action => 'destroy'",
         "  ##{'-' * 30}"
         ].join("\n")
     end

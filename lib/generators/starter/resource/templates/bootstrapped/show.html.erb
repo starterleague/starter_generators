@@ -1,11 +1,39 @@
 <div class="page-header">
-  <h1><%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h1>
+  <h3><%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h3>
 </div>
 
-<dl class="dl-horizontal">
+<div class="row">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
 <% attributes.each do |attribute| -%>
-  <dt><%= attribute.human_name %></dt>
-  <dd><%%= @<%= singular_table_name %>.<%= attribute.name %><%= "?" if attribute.type == :boolean %> %></dd>
+      <dt><%= attribute.human_name %></dt>
+      <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
 
 <% end -%>
-</dl>
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+<% if named_routes? -%>
+      <%%= link_to <%= plural_name %>_url, :class => "btn btn-primary" do %>
+        Back
+      <%% end %>
+      <%%= link_to edit_<%= singular_table_name %>_url(@<%= singular_table_name %>.id), :class => "btn btn-warning" do %>
+        Edit
+      <%% end %>
+      <%%= link_to <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "delete", :data => { :confirm => "Do you really want to delete this <%= singular_table_name %>?" }, :class => "btn btn-danger" do %>
+        Delete
+      <%% end %>
+<% else -%>
+      <a href="/<%= plural_name %>" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+<% end -%>
+    </div>
+  </div>
+</div>
