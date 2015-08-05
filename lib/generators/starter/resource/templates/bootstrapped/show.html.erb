@@ -1,51 +1,39 @@
-<!-- Responsive panel example-->
+<div class="page-header">
+  <h3><%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h3>
+</div>
 
 <div class="row">
-  <div class="col-sm-offset-1 col-sm-10 col-md-offset-2 col-md-8">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title"><%= human_name.titleize %> #<%%= @<%= singular_table_name %>.id %></h3>
-      </div>
-      <div class="panel-body">
-        <div class="row">
-          <div class="col-md-12">
-            <dl class="dl-horizontal">
+  <div class="col-md-12">
+    <dl class="dl-horizontal">
 <% attributes.each do |attribute| -%>
-              <dt><%= attribute.human_name %></dt>
-              <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
+      <dt><%= attribute.human_name %></dt>
+      <dd><%%= @<%= singular_table_name %>.<%= attribute.name %> %></dd>
 
 <% end -%>
-            </dl>
-            <div class="btn-group btn-group-justified">
+    </dl>
+
+    <div class="btn-group btn-group-justified">
 <% if named_routes? -%>
-              <%%= link_to <%= plural_name %>_url, :class => "btn btn-primary" do %>
-                <i class="fa fa-chevron-left"></i>
-              <%% end %>
-              <%%= link_to edit_<%= singular_table_name %>_url(@<%= singular_table_name %>.id), :class => "btn btn-warning" do %>
-                <i class="fa fa-edit"></i>
-              <%% end %>
-              <%%= link_to <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "delete", :data => { :confirm => "Do you really want to delete this <%= singular_table_name %>?" }, :class => "btn btn-danger" do %>
-                <i class="fa fa-trash-o"></i>
-              <%% end %>
+      <%%= link_to <%= plural_name %>_url, :class => "btn btn-primary" do %>
+        Back
+      <%% end %>
+      <%%= link_to edit_<%= singular_table_name %>_url(@<%= singular_table_name %>.id), :class => "btn btn-warning" do %>
+        Edit
+      <%% end %>
+      <%%= link_to <%= singular_table_name %>_url(@<%= singular_table_name %>.id), :method => "delete", :data => { :confirm => "Do you really want to delete this <%= singular_table_name %>?" }, :class => "btn btn-danger" do %>
+        Delete
+      <%% end %>
 <% else -%>
-              <a href="/<%= plural_name %>" class="btn btn-primary">
-                <i class="fa fa-chevron-left"></i>
-              </a>
-
-              <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-warning">
-                <i class="fa fa-edit"></i>
-              </a>
-
-              <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-danger" rel="nofollow">
-                <i class="fa fa-trash-o"></i>
-              </a>
+      <a href="/<%= plural_name %>" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/<%= plural_name %>/<%%= @<%= singular_table_name %>.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_<%= singular_table_name %>/<%%= @<%= singular_table_name %>.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
 <% end -%>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </div>
-
-<!-- End responsive panel example -->
