@@ -36,6 +36,7 @@
         <label for="<%= attribute.name %>" class="control-label">
           <%= attribute.name.humanize %>
         </label>
+
 <% if attribute.field_type == :text_area -%>
         <textarea id="<%= attribute.name %>" name="<%= attribute.name %>" placeholder="<%= attribute.name.humanize %>" class="form-control" rows="3"><%%= @<%= singular_table_name %>.<%= attribute.name %> %></textarea>
 <% else -%>
