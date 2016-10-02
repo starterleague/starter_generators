@@ -16,23 +16,26 @@ module Starter
     class_option :skip_controller, :type => :boolean, :default => false
     class_option :styled, :type => :boolean, :default => true, desc: 'Generates bootstrap-ready view templates'
     class_option :dry, :type => :boolean, :default => false, desc: 'DRYs up the controller, views, and routes'
+    class_option :read_only, :type => :boolean, :default => false, :desc => "Only generates the index and show actions"
 
     def generate_controller
       return if options[:skip_controller]
       if dry?
         template 'dried/controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"
+      elsif read_only?
+        template 'read_only/controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"
       else
         template 'controller.rb', "app/controllers/#{plural_name.underscore}_controller.rb"
       end
     end
 
     def generate_model
-      return if options[:skip_model]
+      return if skip_model?
       template 'model.rb', "app/models/#{singular_name.underscore}.rb"
     end
 
     def generate_migration
-      return if options[:skip_model]
+      return if skip_model?
       migration_template "migration.rb", "db/migrate/create_#{table_name}.rb"
     end
 
@@ -52,6 +55,8 @@ module Starter
       return if options[:skip_controller]
       if dry?
         route "resources :#{plural_name}", "Named RESTful routes"
+      elsif read_only?
+        route read_only_routes, "Index and show routes"
       elsif named_routes?
         route golden_7_named, "Named RESTful routes"
       else
@@ -79,6 +84,16 @@ module Starter
         "  get \"/delete_#{singular_name}/:id\", :controller => \"#{plural_name}\", :action => \"destroy\"",
         "  ##{'-' * 30}"
         ].join("\n")
+    end
+
+    def read_only_routes
+      [
+        "# Routes for the #{singular_name.capitalize} resource:",
+        "  # READ",
+        "  get \"/#{plural_name}\", :controller => \"#{plural_name}\", :action => \"index\"",
+        "  get \"/#{plural_name}/:id\", :controller => \"#{plural_name}\", :action => \"show\"",
+        ""
+      ].join("\n")
     end
 
     def golden_7_named
@@ -113,6 +128,14 @@ module Starter
       options[:styled]
     end
 
+    def skip_model?
+      options[:skip_model]
+    end
+
+    def read_only?
+      options[:read_only]
+    end
+
     # Override of Rails::Generators::Actions
     def route(routing_code, title)
       log :route, title
@@ -128,7 +151,13 @@ module Starter
     end
 
     def available_views
-      dry? ? %w(index new edit show _form) : %w(index new edit show)
+      if dry?
+        %w(index new edit show _form)
+      elsif read_only?
+        %w(index show)
+      else
+        %w(index new edit show)
+      end
     end
 
     def view_filename_with_extensions(name)
