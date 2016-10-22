@@ -29,7 +29,7 @@ module Starter
     def app_resources
       routes = Rails.application.routes.routes
       names = routes.map(&:name).uniq.compact
-      names.reject! { |name| /^rails_info.*/.match(name) || name.pluralize != name }
+      names.reject! { |name| /^rails_info.*/.match(name) || /^rails_mailers.*/.match(name) || name.pluralize != name }
     end
 
   end

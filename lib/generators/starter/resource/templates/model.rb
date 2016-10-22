@@ -1,2 +1,2 @@
-class <%= singular_name.camelize %> < ActiveRecord::Base
+class <%= singular_name.camelize %> < ApplicationRecord
 end

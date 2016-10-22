@@ -5,16 +5,16 @@
   <title><%= Rails.application.class.parent_name %></title>
 
 <% if bootswatch_theme? -%>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootswatch/3.0.2/<%= theme_name %>/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootswatch/3.3.5/<%= theme_name %>/bootstrap.min.css">
 <% else %>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <% end -%>
-  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.2/css/font-awesome.min.css">
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
   <style>
     /* Only necessary if you are using navbar-fixed-top */
     body {
-      padding-top: 50px;
+      padding-top: 60px;
     }
   </style>
 
@@ -22,34 +22,42 @@
   <%%= javascript_include_tag "application" %>
   <%%= csrf_meta_tags %>
 
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 </head>
 <body>
   <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%%= link_to Rails.application.class.parent_name, root_url, :class => "navbar-brand" %>
-    </div>
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a href="/" class="navbar-brand"><%= Rails.application.class.parent_name %></a>
+      </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
 <% if options[:navbar] -%>
 <% app_resources.each do |resource| -%>
-        <li><%%= link_to "<%= resource.humanize.titleize %>", <%= resource %>_url %></li>
+          <li><a href="/<%= resource %>"><%= resource.humanize.titleize %></a></li>
 <% end -%>
-        <li><a href="#">About</a></li>
+          <li><a href="/rails/info">Sitemap</a></li>
 <% end -%>
-      </ul>
-    </div><!-- /.navbar-collapse -->
+        </ul>
+
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/users/edit">Dummy Edit Profile Link</a></li>
+          <li><a href="/users/sign_out" data-method="delete" rel="nofollow">Dummy Sign Out Link</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div>
   </nav>
 
   <div class="container">
@@ -57,6 +65,13 @@
       <div class="alert alert-dismissable alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <%%= notice %>
+      </div>
+    <%% end %>
+
+    <%% if alert.present? %>
+      <div class="alert alert-dismissable alert-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <%%= alert %>
       </div>
     <%% end %>
 
