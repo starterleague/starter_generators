@@ -76,6 +76,10 @@ class <%= plural_name.camelize %>Controller < ApplicationController
 
     @<%= singular_name.underscore %>.destroy
 
-    redirect_to(:back, :notice => "<%= singular_name.humanize %> deleted.")
+    if URI(request.referer).path == "/<%= plural_name.underscore %>/#{@<%= singular_name.underscore %>.id}"
+      redirect_to("/", :notice => "<%= singular_name.humanize %> deleted.")
+    else
+      redirect_to(:back, :notice => "<%= singular_name.humanize %> deleted.")
+    end
   end
 end
