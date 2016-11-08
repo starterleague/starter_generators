@@ -15,7 +15,12 @@ module Starter
         log :insert, 'Bootstrap CSS framework'
       end
       log :insert, 'FontAwesome support'
-      template "layout.html.erb", "app/views/layouts/#{layout_file}.html.erb" if options[:layout]
+
+      if options[:layout]
+        template "bootstrap-4-spacers.scss", "app/assets/stylesheets/bootstrap-4-spacers.scss"
+        template "application.css", "app/assets/stylesheets/application.scss"
+        template "layout.html.erb", "app/views/layouts/#{layout_file}.html.erb"
+      end
     end
 
   protected
